@@ -203,16 +203,66 @@ html.con-luz .pano__capa, html.con-luz .pano__suelo, html.con-luz .pano__palabra
 .visita__lista small { grid-column: 1 / -1; color: var(--texto-suave); font-size: .85rem; }
 .visita__nota { font-size: .9rem; color: var(--texto-suave); }
 .visita__fuera { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; min-height: 44px; }
-.fotos-acento { list-style: none; padding: 0; margin: clamp(36px, 5vw, 64px) 0 10px; display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-end; }
-.fotos-acento li { flex: 0 1 240px; }
-.fotos-acento figure { margin: 0; }
-.fotos-acento img { width: 100%; max-width: var(--max, 100%); border-radius: var(--radio); }
-.fotos-acento figcaption { font-size: .85rem; color: var(--texto-suave); margin-top: 8px; line-height: 1.35; }
-.fotos-acento__nota { font-size: .85rem; color: var(--texto-suave); margin: 0; }
+/* la galería por estancias: índice fijo + filas de la misma altura, sin marcos (receta de Montemar) */
+.galeria { margin-top: clamp(56px, 8vw, 104px); }
+.galeria__cab { display: grid; gap: 6px; margin-bottom: clamp(20px, 3vw, 36px); }
+.galeria__tit { font-size: clamp(2rem, 3.6vw, 3rem); }
+.galeria__aviso { font-size: .88rem; color: var(--texto-suave); max-width: 64ch; margin: 0; }
+.estancias { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+.estancias__indice { position: sticky; top: calc(var(--cabecera) + 24px); z-index: 2; }
+.estancias__indice ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.estancias__indice a { display: flex; align-items: baseline; gap: 10px; min-height: 44px; padding: 10px 14px; border-radius: 999px; text-decoration: none; color: var(--texto-suave); font: 700 1.25rem/1.15 var(--letra-titular); transition: color .25s, background-color .25s; }
+.estancias__indice a:hover { color: var(--marca); }
+.estancias__indice a[aria-current="true"] { color: var(--fondo); background: var(--marca); }
+.estancias__corto { display: none; }
+.estancias__n { margin-left: auto; font-size: .85rem; font-weight: 400; }
+.estancias__grupos { display: grid; gap: clamp(48px, 6vw, 80px); }
+.estancia { scroll-margin-top: calc(var(--cabecera) + 24px); }
+.estancia__tit { font-size: clamp(1.6rem, 2.4vw, 2.2rem); }
+.estancia__txt { margin: 6px 0 0; color: var(--texto-suave); max-width: 60ch; font-size: .98rem; }
+.filas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.filas::after { content: ''; flex: 999 1 0; }
+.foto { margin: 0; flex: var(--r) 1 calc(var(--r) * 13rem); min-width: 0; max-width: var(--max); }
+.foto-btn { display: block; aspect-ratio: var(--r); width: 100%; overflow: hidden; border-radius: var(--radio); background: color-mix(in oklab, var(--texto) 8%, transparent); cursor: zoom-in; }
+.foto-btn picture, .foto-btn img { display: block; width: 100%; height: 100%; }
+.foto-btn img { object-fit: cover; transition: transform .9s var(--ease); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) { .foto-btn:hover img { transform: scale(1.025); } }
+@media (max-width: 899px) {
+  .estancias { grid-template-columns: minmax(0, 1fr); }
+  .estancias__indice { top: var(--cabecera); margin-inline: calc(-1 * var(--gutter)); padding: 8px var(--gutter); background: color-mix(in oklab, var(--fondo-2) 94%, transparent); box-shadow: 0 1px 0 var(--linea); }
+  .estancias__indice ol { display: flex; gap: 4px; }
+  .estancias__indice li { flex: 1 1 auto; }
+  .estancias__indice a { justify-content: center; padding: 8px 6px; font-size: 1.05rem; }
+  .estancias__largo, .estancias__n { display: none; }
+  .estancias__corto { display: inline; }
+  .estancia { scroll-margin-top: calc(var(--cabecera) + 72px); }
+  .foto { flex-basis: calc(var(--r) * 8rem); }
+}
+
+/* el visor: oscuro en los cuatro estados */
+.visor { width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgba(12, 15, 17, .96); color: #EEF1F2; --foco: #F2916B; }
+.visor::backdrop { background: transparent; }
+.visor[open] { display: grid; place-items: center; }
+.visor :focus-visible { outline: 2px solid #F2916B !important; outline-offset: 3px; }
+.visor__fig { margin: 0; display: grid; justify-items: center; gap: 12px; max-width: min(94vw, 1600px); padding: 64px 84px 20px; }
+.visor__fig img { max-height: calc(100svh - 150px); width: auto; height: auto; max-width: 100%; object-fit: contain; border-radius: 8px; touch-action: pan-y pinch-zoom; }
+.visor__pie { font-size: .95rem; color: #C9D1D5; text-align: center; max-width: 70ch; pointer-events: none; }
+.visor__n { margin-left: 8px; color: #EEF1F2; }
+.visor__btn, .visor__cerrar { position: fixed; z-index: 2; width: 52px; height: 52px; display: grid; place-items: center; border: 1px solid rgba(238, 241, 242, .35); border-radius: 999px; background: rgba(12, 15, 17, .75); color: #EEF1F2; }
+.visor__btn { top: 50%; transform: translateY(-50%); }
+.visor__btn--ant { left: 14px; }
+.visor__btn--sig { right: 14px; }
+.visor__cerrar { top: 14px; right: 14px; }
+@media (max-width: 699px) {
+  .visor__fig { padding: 70px 10px 96px; }
+  .visor__fig img { max-height: calc(100svh - 200px); }
+  .visor__btn { top: auto; bottom: 18px; transform: none; }
+  .visor__btn--ant { left: 18px; }
+  .visor__btn--sig { right: 18px; }
+}
 @media (max-width: 899px) {
   .visita { grid-template-columns: minmax(0, 1fr); }
   .visita__marco { aspect-ratio: 4 / 5; }
-  .fotos-acento li { flex: 1 1 calc(50% - 9px); }
 }
 
 /* ---------- 4. el alba, hoy (#lugar, oscura) ---------- */

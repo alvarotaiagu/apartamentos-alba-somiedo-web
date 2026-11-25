@@ -45,6 +45,7 @@ const LLAVE = 'alba-cookies';
 const sinCookies = `try { localStorage.setItem('${LLAVE}', 'si'); } catch (e) {}`;
 const existe = (f) => fs.existsSync(path.join(RAIZ, f));
 const leer = (f) => fs.readFileSync(path.join(RAIZ, f), 'utf8');
+const texto0 = (h) => h.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '').replace(/<!--[\s\S]*?-->/g, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
 const D = JSON.parse(leer('data/alba.json'));
 const DIST = JSON.parse(leer('data/distancias.json'));
 const RUTAS = JSON.parse(leer('ref/raw/rutas.json'));
@@ -80,10 +81,16 @@ if (toca(1)) {
   const faltan = [...rutas].filter((r) => !existe(r) && !/^(css\/lugar\.css|js\/lugar\.js)$/.test(r));
   comprobar(faltan.length === 0, `index.html: existen los ${rutas.size} archivos que enlaza (lugar.css y lugar.js, de Lugar 3D, pueden faltar)`, faltan);
   if (!existe('js/lugar.js') || !existe('css/lugar.css')) nota('aún no están ' + ['css/lugar.css', 'js/lugar.js'].filter((f) => !existe(f)).join(' y ') + ' (Lugar 3D): la página usa el respaldo');
-  // fotos: SOLO las publicables (Sensación Rural y Commons), nunca de EuroWeb Media ni de portales con marca de agua
+  // fotos: SOLO las publicables: EscapadaRural (provisionales, decisión de Álvaro del 2026-11-25), Sensación Rural y
+  // Commons. Nunca de EuroWeb Media (ref/origen/album, galeria, marca), TusCasasRurales ni Turismo Asturias
   const fotosJson = JSON.parse(leer('img/fotos/fotos.json'));
-  comprobar(!/ref\/origen|album|galeria|er-[0-9a-f]{10,}|tcr-|ta-AR0291|marca\/(logo|portada|icono-1024)/.test(html), 'ninguna foto de EuroWeb Media (album, galería, marca) ni de EscapadaRural, TusCasasRurales o Turismo Asturias');
-  comprobar(fotosJson.every((f) => /^Sensación Rural|^Wikimedia Commons/.test(f.origen)), 'img/fotos: solo Sensación Rural y Wikimedia Commons');
+  comprobar(!/ref\/origen|tcr-|ta-AR0291|marca\/(logo|portada|icono-1024)|eurowebmedia\.es\/[^"]*\.(jpe?g|png|webp)/.test(html), 'ninguna foto de EuroWeb Media, TusCasasRurales ni Turismo Asturias en la página');
+  comprobar(fotosJson.every((f) => /^Sensación Rural|^Wikimedia Commons|^EscapadaRural/.test(f.origen)) && fotosJson.filter((f) => /^EscapadaRural/.test(f.origen)).every((f) => /^er-[0-9a-f]+\.webp$/.test(f.fuente) && fs.existsSync(path.join(RAIZ, 'ref/origen/portales', f.fuente))), 'img/fotos: solo EscapadaRural (er-*, de los dueños), Sensación Rural y Wikimedia Commons');
+  const albumes = ['album', 'galeria', 'marca'].flatMap((d) => (fs.existsSync(path.join(RAIZ, 'ref/origen', d)) ? fs.readdirSync(path.join(RAIZ, 'ref/origen', d)) : []));
+  comprobar(fotosJson.every((f) => !albumes.includes(f.fuente || '')), 'ninguna sale de las carpetas de EuroWeb Media');
+  const er = fotosJson.filter((f) => /^EscapadaRural/.test(f.origen));
+  comprobar(er.length >= 16 && er.length <= 24 && er.every((f) => f.tratamiento && Math.abs(f.tratamiento.giro) <= 3 && f.tratamiento.balance.every((g) => g >= 0.94 && g <= 1.06)), `EscapadaRural: ${er.length} elegidas (16-24), con el tratamiento suave (giro ≤ 3°, balance ±6 %)`);
+  comprobar(/fotos provisionales de la ficha del alojamiento en EscapadaRural/i.test(texto0(html)) && /EscapadaRural/.test(html.match(/<div class="pie__creditos">[\s\S]*?<\/div>/)[0]), 'rótulo honesto junto a la galería y EscapadaRural en los créditos del pie');
   comprobar(fotosJson.every((f) => Math.max(...f.anchos) <= f.ancho), 'ninguna foto se sirve por encima de su tamaño original', fotosJson.filter((f) => Math.max(...f.anchos) > f.ancho).map((f) => f.nombre));
   const faltanF = []; for (const f of fotosJson) for (const w of f.anchos) for (const e of ['webp', 'jpg']) if (!existe(`img/fotos/${f.nombre}-${w}.${e}`)) faltanF.push(`${f.nombre}-${w}.${e}`);
   comprobar(faltanF.length === 0, 'cada foto existe en sus anchos, en WebP y JPG', faltanF.slice(0, 5));
@@ -286,7 +293,7 @@ if (toca(4)) {
 
 /* ================= 5. por dentro: la visita ================= */
 if (toca(5)) {
-  console.log('\n5. Por dentro: la visita virtual a petición');
+  console.log('\n5. Por dentro: la visita virtual a petición y la galería por estancias');
   const { ctx: c, page } = await nueva();
   await ir(page, PAG);
   const antes = await page.evaluate(() => ({ ifr: document.querySelectorAll('iframe').length, aviso: document.querySelector('.visita__aviso').textContent, guia: document.querySelectorAll('.visita__lista li').length }));
@@ -295,9 +302,71 @@ if (toca(5)) {
   await page.click('#visita-btn');
   const src = await page.getAttribute('#visita-marco iframe', 'src');
   comprobar(/cdn\.eurowebmedia\.es\/docs\/visitas-virtuales\/0000141572\/index\.html/.test(src || ''), 'al pulsar se crea el iframe de su visita (Pano2VR de EuroWeb Media)', src);
-  const fotos = await page.evaluate(() => [...document.querySelectorAll('.fotos-acento img')].map((i) => ({ n: i.currentSrc.split('/').pop(), w: i.getBoundingClientRect().width, nat: +i.getAttribute('width') })));
-  comprobar(fotos.length === 4 && fotos.every((f) => f.w <= f.nat + 1), 'las fotos limpias, pequeñas y nunca más grandes que su original', fotos);
+  // la galería por estancias
+  const G = JSON.parse(leer('data/fotos.json'));
+  const nombres = G.estancias.flatMap((e) => e.fotos.map((x) => x.n));
+  const gal = await page.evaluate(() => ({ n: document.querySelectorAll('.estancias .foto-btn').length, est: [...document.querySelectorAll('.estancias__indice a')].map((a) => a.dataset.est), cur: document.querySelector('.estancias__indice a[aria-current="true"]').dataset.est, aviso: document.querySelector('.galeria__aviso').textContent, marcos: [...document.querySelectorAll('.foto-btn')].some((b) => parseFloat(getComputedStyle(b).borderTopWidth) > 0) }));
+  comprobar(gal.n === nombres.length && gal.est.length === G.estancias.length && !gal.marcos, `galería: ${gal.n} fotos en ${gal.est.length} estancias (${gal.est.join(', ')}), sin marcos`);
+  comprobar(/provisionales/.test(gal.aviso) && /EscapadaRural/.test(gal.aviso), 'el rótulo de fotos provisionales junto a la galería');
+  // alturas igualadas por fila: las fotos de una misma fila miden lo mismo de alto
+  const filas = await page.evaluate(() => [...document.querySelectorAll('.filas')].map((f) => { const por = {}; [...f.children].forEach((x) => { const r = x.getBoundingClientRect(); const k = Math.round(r.top); (por[k] = por[k] || []).push(Math.round(r.height)); }); return Object.values(por).filter((v) => v.length > 1).map((v) => Math.max(...v) - Math.min(...v)); }).flat());
+  comprobar(filas.every((d) => d <= 2), 'en cada fila, todas las fotos con la misma altura', filas);
+  // el índice marca la estancia que se ve
+  await page.click('.estancias__indice a[data-est="banos"]');
+  await page.waitForFunction(() => document.querySelector('.estancias__indice a[aria-current="true"]').dataset.est === 'banos', null, { timeout: 4000 }).catch(() => {});
+  const cur2 = await page.evaluate(() => ({ cur: document.querySelector('.estancias__indice a[aria-current="true"]').dataset.est, tit: document.querySelector('#t-est-banos').getBoundingClientRect().top, ind: document.querySelector('.estancias__indice').getBoundingClientRect().bottom, cab: document.querySelector('#cab').getBoundingClientRect().bottom }));
+  comprobar(cur2.cur === 'banos' && cur2.tit >= cur2.cab, 'el índice lleva a «Baños», lo marca y el título queda a la vista bajo la cabecera', cur2);
+  // pulsar CADA miniatura: el visor lleva su MISMO nombre (y la grande llega después)
+  const malos = [];
+  for (const n of nombres) {
+    await page.click(`.foto-btn[data-visor="${n}"]`);
+    const v = await page.evaluate(() => ({ open: document.querySelector('#visor').open, n: document.querySelector('#visor-img').dataset.nombre, src: document.querySelector('#visor-img').getAttribute('src') }));
+    if (!v.open || v.n !== n || !v.src.includes('/' + n + '-')) malos.push({ n, v });
+    await page.keyboard.press('Escape');
+  }
+  comprobar(malos.length === 0, `escritorio: cada una de las ${nombres.length} miniaturas abre el visor con su misma foto`, malos.slice(0, 4));
+  await page.click(`.foto-btn[data-visor="cocina-buhardilla"]`);
+  await page.waitForFunction(() => /-1600\.webp$/.test(document.querySelector('#visor-img').getAttribute('src')), null, { timeout: 5000 }).catch(() => {});
+  const vis = await page.evaluate(() => { const i = document.querySelector('#visor-img'); return { src: i.getAttribute('src'), w: i.getBoundingClientRect().width, max: parseFloat(i.style.maxWidth) }; });
+  comprobar(/cocina-buhardilla-1600\.webp$/.test(vis.src) && vis.w <= vis.max + 1, 'el visor pone la grande al cargar y nunca la enseña por encima de su tamaño real', vis);
+  await page.keyboard.press('ArrowRight');
+  const sig = await page.evaluate(() => document.querySelector('#visor-img').dataset.nombre);
+  comprobar(sig === nombres[nombres.indexOf('cocina-buhardilla') + 1], `flecha derecha: la siguiente de la serie (${sig})`);
+  await page.keyboard.press('Escape');
+  // ninguna miniatura se ve más grande que su tamaño real ni se sirve con un archivo más ancho que el original
+  const tam = await page.evaluate(() => [...document.querySelectorAll('.estancias img')].map((i) => ({ n: i.alt.slice(0, 20), w: i.getBoundingClientRect().width, nat: +i.getAttribute('width'), cur: i.currentSrc })));
+  comprobar(tam.every((t) => t.w <= t.nat + 1) && tam.every((t) => !/-1600\./.test(t.cur)), 'miniaturas: nunca por encima de su tamaño real y sin pedir la de 1600 (esa es solo del visor)', tam.filter((t) => t.w > t.nat + 1 || /-1600\./.test(t.cur)).slice(0, 3));
+  comprobar(page.errores.length === 0, 'sin errores en la consola', page.errores);
   await c.close();
+  // móvil: tap en CADA miniatura, y nada encima de los botones ‹ › (abajo, en toda su altura)
+  const { ctx: c2, page: p2 } = await nueva({ viewport: { width: 390, height: 844 }, movil: true, touch: true });
+  await ir(p2, PAG);
+  const malosM = [];
+  for (const n of nombres) {
+    await p2.locator(`.foto-btn[data-visor="${n}"]`).scrollIntoViewIfNeeded();
+    await p2.tap(`.foto-btn[data-visor="${n}"]`);
+    const v = await p2.evaluate(() => ({ open: document.querySelector('#visor').open, n: document.querySelector('#visor-img').dataset.nombre }));
+    if (!v.open || v.n !== n) malosM.push({ n, v });
+    await p2.tap('#visor-cerrar');
+  }
+  comprobar(malosM.length === 0, `móvil: cada una de las ${nombres.length} miniaturas, con el dedo, abre su misma foto`, malosM.slice(0, 4));
+  await p2.tap(`.foto-btn[data-visor="dormitorio-blanco"]`);
+  const enc = await p2.evaluate(() => ['#visor-ant', '#visor-sig'].map((s) => { const b = document.querySelector(s), r = b.getBoundingClientRect(); return [0.25, 0.5, 0.75, 0.9].every((k) => { const e = document.elementFromPoint(r.left + r.width / 2, r.top + r.height * k); return e && b.contains(e); }); }));
+  comprobar(enc.every(Boolean), 'móvil: nada pisa los botones ‹ › del visor (a 25, 50, 75 y 90 % de su alto)', enc);
+  const bAnt = await p2.locator('#visor-ant').boundingBox();
+  await p2.touchscreen.tap(bAnt.x + bAnt.width / 2, bAnt.y + bAnt.height * 0.88);
+  const ant = await p2.evaluate(() => document.querySelector('#visor-img').dataset.nombre);
+  comprobar(ant === nombres[nombres.indexOf('dormitorio-blanco') - 1], `móvil: tocar ‹ por abajo pasa a la anterior (${ant})`);
+  comprobar(p2.errores.length === 0, 'móvil: sin errores en la consola', p2.errores);
+  await c2.close();
+  // sin JS: la galería es una rejilla simple de fotos que enlazan a la grande
+  const c3 = await browser.newContext({ viewport: { width: 1280, height: 800 }, deviceScaleFactor: 1, javaScriptEnabled: false, reducedMotion: 'reduce' });
+  await c3.route('**/*', (r) => (new URL(r.request().url()).hostname === 'localhost' ? r.continue() : r.abort()));
+  const p3 = await c3.newPage();
+  await p3.goto(PAG);
+  const sinJs = await p3.evaluate(() => { const a = [...document.querySelectorAll('.estancias .foto-btn')]; return { n: a.length, ok: a.every((x) => /^img\/fotos\/.+\.jpg$/.test(x.getAttribute('href'))), vis: a.filter((x) => x.getBoundingClientRect().height > 40).length }; });
+  comprobar(sinJs.n === nombres.length && sinJs.ok && sinJs.vis === nombres.length, 'sin JS: las fotos se ven en su rejilla y cada una enlaza a su versión grande', sinJs);
+  await c3.close();
 }
 
 /* ================= 6. el hueco del 3D ================= */

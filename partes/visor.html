@@ -1,0 +1,12 @@
+<!-- el visor de la galería (js/main.js, punto 7 bis): abre por el NOMBRE del archivo; primero la de 800 (ya en caché) y la
+     grande al cargar. En el móvil los botones ‹ › van abajo y no tienen nada fijo encima (el pie y el contador, en flujo
+     y sin recibir toques). Se cierra con Esc, con la × o tocando fuera de la foto. -->
+<dialog class="visor" id="visor" aria-label="Fotos de la casa">
+  <figure class="visor__fig">
+    <img id="visor-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="1600" height="1200" decoding="async">
+    <figcaption class="visor__pie"><span id="visor-pie"></span> <span class="visor__n cifra" id="visor-n"></span></figcaption>
+  </figure>
+  <button class="visor__btn visor__btn--ant" id="visor-ant" type="button" aria-label="Foto anterior"><svg class="ico" width="26" height="26" aria-hidden="true"><use href="#i-ant" width="24" height="24"/></svg></button>
+  <button class="visor__btn visor__btn--sig" id="visor-sig" type="button" aria-label="Foto siguiente"><svg class="ico" width="26" height="26" aria-hidden="true"><use href="#i-sig" width="24" height="24"/></svg></button>
+  <button class="visor__cerrar" id="visor-cerrar" type="button" aria-label="Cerrar"><svg class="ico" width="24" height="24" aria-hidden="true"><use href="#i-cerrar" width="24" height="24"/></svg></button>
+</dialog>

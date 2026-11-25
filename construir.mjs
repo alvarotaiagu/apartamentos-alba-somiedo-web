@@ -55,9 +55,12 @@ function picture(atrs) {
   const nombre = /data-foto="([^"]+)"/.exec(atrs)[1];
   const f = FOTOS.get(nombre);
   if (!f) throw new Error('Foto desconocida: ' + nombre);
-  const set = (ext) => f.anchos.map((w) => `img/fotos/${nombre}-${w}.${ext} ${w}w`).join(', ');
+  // data-hasta="800": en la rejilla no se ofrece la de 1600 (esa es solo para el visor)
+  const hasta = +((/\bdata-hasta="(\d+)"/.exec(atrs) || [, 0])[1]) || Infinity;
+  const anchos = f.anchos.filter((w) => w <= hasta);
+  const set = (ext) => anchos.map((w) => `img/fotos/${nombre}-${w}.${ext} ${w}w`).join(', ');
   const sizes = (/\bsizes="([^"]+)"/.exec(atrs) || [, '100vw'])[1];
-  let resto = atrs.replace(/\s*data-foto="[^"]+"/, '').replace(/\s*\bsizes="[^"]+"/, '');
+  let resto = atrs.replace(/\s*data-foto="[^"]+"/, '').replace(/\s*\bsizes="[^"]+"/, '').replace(/\s*data-hasta="\d+"/, '');
   if (!/\bloading=/.test(resto)) resto += ' loading="lazy"';
   if (!/\bdecoding=/.test(resto)) resto += ' decoding="async"';
   return `<picture data-foto="${nombre}"><source type="image/webp" srcset="${set('webp')}" sizes="${sizes}"><img src="img/fotos/${nombre}-${f.anchos[0]}.jpg" srcset="${set('jpg')}" sizes="${sizes}" width="${f.ancho}" height="${f.alto}" style="--max:${f.ancho}px"${resto}></picture>`;
@@ -250,12 +253,41 @@ ${guia}
         </aside>
       </div>`;
 }
-function fotosDentro() {
-  const F = leerJson('data/fotos.json').acento.map((x) => [x.n, x.alt]);
-  return `      <ul class="fotos-acento" aria-label="Algunas fotos de la casa">
-${F.map(([n, alt]) => `        <li><figure><img data-foto="${n}" alt="${esc(alt)}" sizes="(max-width: 699px) 44vw, 260px"><figcaption>${esc(alt.split(':')[0])}</figcaption></figure></li>`).join('\n')}
-      </ul>
-      <p class="fotos-acento__nota">Fotos de la casa en su ficha de Sensación Rural, a su tamaño: la casa tiene que mandar las suyas a buena resolución.</p>`;
+// la galería por estancias (data/fotos.json): índice fijo que marca la estancia que se ve, filas de la misma altura sin
+// marcos y el visor, que abre por el NOMBRE del archivo (js/main.js). Sin JS, cada foto enlaza a su versión grande.
+function galeria() {
+  const G = leerJson('data/fotos.json');
+  const E = G.estancias.filter((e) => e.fotos.length);
+  const ind = E.map((e, i) => `          <li><a href="#est-${e.id}" data-est="${e.id}"${i === 0 ? ' aria-current="true"' : ''}><span class="estancias__largo">${esc(e.nombre)}</span><span class="estancias__corto" aria-hidden="true">${esc(e.corto)}</span><span class="estancias__n cifra" aria-hidden="true">${e.fotos.length}</span></a></li>`).join('\n');
+  const grupos = E.map((e) => `          <section class="estancia" id="est-${e.id}" aria-labelledby="t-est-${e.id}">
+            <h4 class="estancia__tit" id="t-est-${e.id}">${esc(e.nombre)}</h4>
+            <p class="estancia__txt">${esc(e.texto)}</p>
+            <div class="filas">
+${e.fotos.map((x) => {
+  const f = FOTOS.get(x.n);
+  if (!f) throw new Error('Foto de la galería desconocida: ' + x.n);
+  const grande = f.anchos[f.anchos.length - 1];
+  return `              <figure class="foto" style="--r:${(f.ancho / f.alto).toFixed(3)};--max:${f.ancho}px"><a class="foto-btn" href="img/fotos/${x.n}-${grande}.jpg" data-visor="${x.n}" data-grupo="galeria" data-anchos="${f.anchos.join(',')}" data-ancho="${f.ancho}" data-alto="${f.alto}" aria-label="Ver más grande: ${esc(x.alt)}"><img data-foto="${x.n}" data-hasta="800" alt="${esc(x.alt)}" sizes="(max-width: 699px) 92vw, (max-width: 1099px) 46vw, 30vw"></a></figure>`;
+}).join('\n')}
+            </div>
+          </section>`).join('\n');
+  const n = E.reduce((s, e) => s + e.fotos.length, 0);
+  return `      <div class="galeria" id="galeria">
+        <div class="galeria__cab">
+          <h3 class="galeria__tit">Por estancias</h3>
+          <p class="galeria__aviso">${esc(G.aviso)}</p>
+        </div>
+        <div class="estancias">
+          <nav class="estancias__indice" aria-label="Estancias de la galería">
+            <ol>
+${ind}
+            </ol>
+          </nav>
+          <div class="estancias__grupos" data-n="${n}">
+${grupos}
+          </div>
+        </div>
+      </div>`;
 }
 
 /* ---------- a cuánto queda ---------- */
@@ -353,7 +385,7 @@ ${ruta('aeropuerto', 'Desde el aeropuerto de Asturias', '')}
 function creditos() {
   return `    <div class="pie__creditos">
       <h2 class="pie__h">Fotos y datos</h2>
-      <p>Fotos del paisaje, de Wikimedia Commons: ${COMMONS.map((c) => `<a href="${esc(c.pagina)}">${esc(c.pie || c.alt.split(',')[0])}</a>, de ${esc(c.autor)} (<a href="${esc(c.licenciaUrl)}">${esc(c.licencia)}</a>)`).join('; ')}. Fotos de la casa: su ficha en Sensación Rural. Relieve y alturas: © Instituto Geográfico Nacional (MDT, CC BY 4.0). Caminos y sitios: © colaboradores de OpenStreetMap (ODbL), rutas con OSRM. El dibujo de la fachada está hecho a partir de una foto de la casa.</p>
+      <p>Fotos del paisaje, de Wikimedia Commons: ${COMMONS.map((c) => `<a href="${esc(c.pagina)}">${esc(c.pie || c.alt.split(',')[0])}</a>, de ${esc(c.autor)} (<a href="${esc(c.licenciaUrl)}">${esc(c.licencia)}</a>)`).join('; ')}. Fotos de la casa, provisionales: su ficha en <a href="https://www.escapadarural.com/casa-rural/asturias/apartamentos-rurales-alba">EscapadaRural</a> (hechas por la casa; llevan la marca de agua del portal) y en Sensación Rural. Relieve y alturas: © Instituto Geográfico Nacional (MDT, CC BY 4.0). Caminos y sitios: © colaboradores de OpenStreetMap (ODbL), rutas con OSRM. El dibujo de la fachada está hecho a partir de una foto de la casa.</p>
     </div>`;
 }
 
@@ -382,7 +414,7 @@ for (const src of fuentes) {
   rep('<!--servicios-->', servicios);
   rep('<!--vistazo-->', vistazo);
   rep('<!--visita-->', visita);
-  rep('<!--fotos-dentro-->', fotosDentro);
+  rep('<!--galeria-->', galeria);
   rep('<!--lugar-respaldo-->', lugarRespaldo);
   rep('<!--distancias-->', distancias);
   rep('<!--resenas-->', resenas);

@@ -1,16 +1,57 @@
 {
- "_nota": "Fotos de la casa. HOY solo hay 5 publicables (Sensación Rural, 750 px, sin marca de agua); las 83 de su web son de EuroWeb Media y NO se usan. «acento» es lo que sale en «Por dentro» (construir.mjs, <!--fotos-dentro-->). «estancias» queda preparada para la galería por estancias cuando la casa mande sus originales: se ponen en ref/origen/casa/, se añaden a scripts/fotos.py, se listan aquí por estancia y se construye la galería (índice fijo que marca la estancia, filas de la misma altura, sin marcos; ver README).",
- "acento": [
-  { "n": "dormitorio-verde", "alt": "Un dormitorio: techo de madera con vigas, cama de matrimonio y contraventanas" },
-  { "n": "bano-hidromasaje", "alt": "La bañera de hidromasaje de uno de los baños" },
-  { "n": "bano-ventana", "alt": "Un baño con ventana de madera, lavabo y bañera" },
-  { "n": "casa-escalera", "alt": "La escalera exterior de madera y piedra, con la peña detrás" }
- ],
+ "_nota": "Galería de «Por dentro», por estancias (construir.mjs, <!--galeria-->). PROVISIONAL: 20 fotos de la ficha del alojamiento en EscapadaRural (hechas por los dueños, con la marca de agua del portal, que no se toca) y la fachada de Sensación Rural, a la espera de sus originales. No se dice de qué apartamento es cada foto: no se sabe. Las fotos de EuroWeb Media (su web) NO se usan. Para cambiarlas: scripts/fotos.py (ELEGIDAS) y esta lista.",
+ "aviso": "Fotos provisionales de la ficha del alojamiento en EscapadaRural, hechas por la casa, a la espera de las originales.",
  "estancias": [
-  { "id": "fuera", "nombre": "La casa por fuera", "fotos": ["casa-fachada", "casa-escalera"] },
-  { "id": "salon", "nombre": "Salón y cocina", "fotos": [] },
-  { "id": "dormitorios", "nombre": "Dormitorios", "fotos": ["dormitorio-verde"] },
-  { "id": "banos", "nombre": "Baños", "fotos": ["bano-hidromasaje", "bano-ventana"] },
-  { "id": "alrededor", "nombre": "Desde la casa", "fotos": [] }
+  {
+   "id": "fuera", "nombre": "La casa por fuera", "corto": "Fuera",
+   "texto": "Planta baja de piedra, la planta alta encalada y la escalera de madera que sube a las puertas de arriba.",
+   "fotos": [
+    { "n": "casa-fachada", "alt": "La fachada de la casa: planta baja de piedra, escalera exterior con barandilla de madera, la planta alta encalada y el rótulo «Apartamentos rurales Alba»" },
+    { "n": "casa-escalera-pena", "alt": "La escalera exterior y el rótulo de la casa, con la peña y el prado detrás" }
+   ]
+  },
+  {
+   "id": "salon", "nombre": "Salón y cocina", "corto": "Salón",
+   "texto": "Salones con la cocina abierta bajo techos de madera con vigas. En las fotos: placa, horno, microondas, frigorífico y lavadora.",
+   "fotos": [
+    { "n": "cocina-buhardilla", "alt": "Cocina con horno, lavadora, microondas y mesa para seis, bajo las vigas del techo inclinado" },
+    { "n": "salon-mesa", "alt": "Salón con mesa de madera, sofá, televisión y armario rústico, paredes naranjas" },
+    { "n": "comedor-buhardilla", "alt": "Comedor bajo el techo inclinado de madera, con la encimera a lo largo de la pared" },
+    { "n": "salon-naranja-cocina", "alt": "Salón con la cocina abierta, sofá y baúl de madera, paredes naranjas" },
+    { "n": "cocina-ventanas", "alt": "Cocina con dos ventanas a la ladera, lavadora y mesa de madera" },
+    { "n": "salon-blanco", "alt": "Salón de paredes blancas con sofá, baúl, televisión y la puerta del baño" },
+    { "n": "salon-cocina-pequeno", "alt": "Salón y cocina: sofá, mesa, frigorífico, microondas y lavadora" },
+    { "n": "cocina-pasillo", "alt": "Cocina en línea con mesa para cuatro y el pasillo al fondo" },
+    { "n": "salon-sofa", "alt": "Cocina y salón con sofá, baúl de madera y paredes naranjas" }
+   ]
+  },
+  {
+   "id": "dormitorios", "nombre": "Dormitorios", "corto": "Dormir",
+   "texto": "De matrimonio o con dos camas, con cabecero de madera, contraventanas y radiador.",
+   "fotos": [
+    { "n": "dormitorio-verde-monte", "alt": "Dormitorio de matrimonio de paredes verdes, con la ventana al monte" },
+    { "n": "dormitorio-blanco", "alt": "Dormitorio de matrimonio con friso de madera y ventana a una casa de piedra" },
+    { "n": "dormitorio-dos-camas", "alt": "Dormitorio con dos camas bajo el techo inclinado de madera, paredes verdes" },
+    { "n": "dormitorio-crema", "alt": "Dormitorio de matrimonio de paredes claras, con la ladera en la ventana" },
+    { "n": "dormitorio-verde-ventana", "alt": "Dormitorio de matrimonio de paredes verdes, con contraventanas de madera abiertas" }
+   ]
+  },
+  {
+   "id": "banos", "nombre": "Baños", "corto": "Baños",
+   "texto": "Azulejo azul y blanco, lavabo de mármol y grifería de latón; bañera de hidromasaje o ducha.",
+   "fotos": [
+    { "n": "bano-ventana-hidromasaje", "alt": "Baño de azulejo azul con bañera de hidromasaje y ventana" },
+    { "n": "bano-hidromasaje-espejo", "alt": "Baño con bañera de hidromasaje, lavabo de mármol y espejo de madera" },
+    { "n": "bano-ducha", "alt": "Baño con plato de ducha, lavabo de mármol y grifería de latón" },
+    { "n": "banera-hidromasaje", "alt": "La bañera de hidromasaje, de cerca" }
+   ]
+  },
+  {
+   "id": "vista", "nombre": "Desde la casa", "corto": "Vista",
+   "texto": "Por una de las ventanas: el camino, un prado y las peñas del valle.",
+   "fotos": [
+    { "n": "vista-ventana", "alt": "El valle desde una ventana: el camino, un prado con vacas y las peñas" }
+   ]
+  }
  ]
 }

@@ -72,7 +72,13 @@ Contrato con Lugar 3D: `--fondo`, `--superficie`, `--texto`, `--texto-suave`, `-
 3. **Por dentro**: su visita virtual (Pano2VR de EuroWeb Media) **creada solo al pulsar**, con el aviso de contenido
    externo y cookies junto al botón. **Su visor no admite abrir un nodo por URL** (comprobado: `index.html`,
    `pano2vr_player.js` 6.1.14 y `skin.js` no leen ni hash ni parámetros), así que va un solo visor con su tira de
-   miniaturas y, al lado, la guía de las nueve vistas por apartamento. Debajo, cuatro fotos limpias pequeñas.
+   miniaturas y, al lado, la guía de las nueve vistas por apartamento. La visita va primero (protagonista); debajo,
+   **la galería por estancias** (Fuera, Salón y cocina, Dormitorios, Baños, Desde la casa; 21 fotos): índice fijo que
+   marca la estancia que se ve (en el móvil, barra fija con los nombres cortos), fotos sin marco en filas de la misma
+   altura (ninguna más ancha que su original: `--max`) y visor que abre por el NOMBRE del archivo (primero la de 800,
+   ya en caché, y la de 1600 al cargar; flechas, Esc, deslizar con el dedo; en el móvil los botones ‹ › abajo sin nada
+   encima). Rótulo a la vista: «Fotos provisionales de la ficha del alojamiento en EscapadaRural, hechas por la casa, a
+   la espera de las originales». Sin JS, cada foto enlaza a su versión grande.
 4. **El alba, hoy** (`#lugar`): el 3D de Lugar. Respaldo de la Web: el sol en la casa el día 21 de cada mes (calculado con
    `js/sol.js` al construir).
 5. **A cuánto queda** (`js/distancias.js`, `Alba.distancias`): mapa propio sobre el **sombreado real del relieve** (MDT25
@@ -98,17 +104,45 @@ Pie: el día que se completa, contacto, créditos (fotos de Commons con autor y 
 «Preferencias de cookies». Legales (`scripts/legales.mjs`) con el titular (Vimay Alojamientos, S. L., B74046673). 404
 «Por aquí no sale el sol» (las peñas sin sol).
 
-## Fotos (regla dura del encargo)
+## Fotos (regla dura del encargo, con el cambio del 2026-11-25)
 
-- **Nada de EuroWeb Media** (`ref/origen/album`, `galeria`, `marca`): solo se miraron para dibujar la fachada. Tampoco las
-  de EscapadaRural, TusCasasRurales ni Turismo Asturias (marca de agua del portal). Lo comprueba `verificar.mjs`.
-- **Las 5 de Sensación Rural** (`sr-*.webp`, 750 px): a su tamaño y a 480, nunca ampliadas (`scripts/fotos.py`).
+- **Nada de EuroWeb Media** (`ref/origen/album`, `galeria`, `marca`): solo se miraron para dibujar la fachada. Tampoco
+  TusCasasRurales (`tcr-*`) ni Turismo Asturias. Lo comprueba `verificar.mjs`.
+- **EscapadaRural, PROVISIONALES** (decisión de Álvaro del 2026-11-25: la web tenía muy pocas fotos de los
+  apartamentos). Son las de los dueños en su ficha del portal (`ref/origen/portales/er-*.webp`, casi todas 1600×1200) y
+  **llevan la marca de agua tenue del portal en el centro, que no se toca**: ni se borra, ni se tapa, ni se recorta para
+  esconderla, ni se difumina. Se miraron las 32 una a una y se quedan **20**:
+  - **Fuera** (1): la escalera con el rótulo y la peña (`64a52c4d733e8`), además de la fachada de Sensación Rural.
+  - **Salón y cocina** (9): `6573264970832`, `6573262e55a38`, `6573262820962`, `65732622805f9`, `65732896da60e`,
+    `6573287ecbd26`, `65732700a9f0f`, `657327088e088`, `657327a41bf4b`.
+  - **Dormitorios** (5): `657327221994f`, `657328859f0eb`, `6573263d5881a`, `657327971fb29`, `6573265d191b2`.
+  - **Baños** (4): `65732642f124d`, `6573288c05c49`, `65732715eed8e`, `65732653edbfb`.
+  - **Desde la casa** (1): la ventana con el camino, el prado y las peñas (`6544fb1e9137d`, 675×900).
+  - **Descartadas (12)**: tres parejas idénticas (`6573279e28e53`=`657327e2e6090`, `657327a41bf4b`=`657327e8d42d7`,
+    `657327aa2a063`=`657327dd8821a`; de la primera y la tercera no se queda ninguna porque repiten un baño y un salón
+    que ya están); `576bbfb9cbc74` (bañera, ampliada y borrosa: nitidez 0,64 y detalle muy bajo); `6544fb1bb5d4f`
+    (dormitorio verde, ampliada y borrosa: 0,47, gran angular deformado); `6573270fce89a` (cocina torcida, la cámara
+    inclinada, y repite la de `657327088e088`); `64a52c4f2b8f7` (la misma escalera que `64a52c4d733e8`, más torcida);
+    `64a52c508de57` y `6544fb1d21df8` (la fachada y un baño que están iguales en Sensación Rural sin marca de agua; el
+    baño lo enseña mejor `65732642f124d`); `657328e0a09dc` (la bañera de cerca, repetida).
+  - No se dice de qué apartamento es cada foto (no se sabe). Los textos de las estancias solo cuentan lo que se ve.
+  - **Tratamiento, el mismo para todas** (`scripts/fotos.py`): enderezar si las verticales se van entre 0,3° y 3° (solo
+    hizo falta en `cocina-pasillo`, −0,5°, recortando lo justo por los bordes); balance de blancos suave con los píxeles
+    claros casi neutros (a la mitad y como mucho ±6 %; en la práctica, ±2 %); y la misma curva (contraste ×1,04). Se
+    sirven en WebP (y JPG de respaldo) a 480 y 800 en la rejilla y a su tamaño (1.600 como mucho) solo en el visor.
+- **Sensación Rural** (`sr-*.webp`, 750 px, sin marca): solo la fachada de frente (`casa-fachada`); las otras cuatro las
+  enseña mejor una de EscapadaRural (la escalera, la bañera, el dormitorio verde y el baño con ventana).
 - **Paisaje de Wikimedia Commons** (`scripts/commons.json`): cinco, licencia comprobada una a una (CC BY 4.0, CC BY-SA 3.0
   y 4.0) y que son de ese sitio: la braña de La Pornacal (MRuedaC), el lago del Valle (Tanja Freibott), el lago de la Cueva
   en Saliencia (Saliencia2013), Pola de Somiedo (Carmenmoran) y la braña de Sousas en el valle del Lago (Juanbitas; el pie
   dice que es la braña, no el pueblo). Se sirven a 480 y 800 desde la miniatura de 1280 de Commons; autor, licencia y enlace
   en el pie y en la ficha del sitio.
-- `data/fotos.json` deja preparada la galería por estancias para cuando manden las originales.
+- `data/fotos.json` es la galería (estancias, orden, textos y alt). Cuando manden las originales: ponerlas en
+  `ref/origen/casa/`, cambiar `ELEGIDAS` en `scripts/fotos.py`, la lista de `data/fotos.json`, quitar el rótulo de
+  «provisionales» (`aviso`) y la mención de EscapadaRural de los créditos (`construir.mjs`, `creditos()`).
+- Peso: la galería es diferida (`loading="lazy"`). Las 21 en WebP pesan **474 KB a 480 px** (pantallas de escala 1) y
+  **1.083 KB a 800** (escala 2 o más); antes, las cuatro fotos de acento pesaban 79 KB. El HTML pasa de 103 a 126 KB.
+  Las de 1.600 (3 MB en total) solo se piden al abrirlas en el visor.
 
 ## Datos (cómo se rehacen)
 
@@ -206,6 +240,12 @@ navegador en los cuatro, foco); la casa; la visita a petición; el hueco del 3D;
 táctil, fallo de datos); el simulador; cookies, mapa y mando; móvil (menú, barra, anchos, botones); legales; rendimiento; y,
 una vez y al final, con movimiento (gesto táctil, pie, recarga).
 
+**Tanda de la galería (2026-11-25, tarde)**: `node verificar.mjs`, una vez al final: **173 bien, 0 mal** (LCP 1,30 s;
+una tarea larga de 194 ms). El bloque 5 añade la galería: 21 fotos en 5 estancias sin marcos, alturas iguales por fila,
+el índice que marca la estancia, **cada una de las 21 miniaturas pulsada (escritorio) y tocada con `tap()` (móvil)
+abre el visor con su mismo nombre**, la grande al cargar y nunca por encima de su tamaño, flechas, nada encima de ‹ ›
+en el móvil (a 25, 50, 75 y 90 % de su alto) y tocar ‹ por abajo, miniaturas sin pedir la de 1600, y la rejilla sin JS.
+
 ## Qué mirar en Chrome
 
 **Nadie ha visto la web pintada**: las pruebas miden comportamiento, no aspecto (sin capturas, por las reglas del PC).
@@ -221,7 +261,10 @@ Servidor local en esta carpeta (`npx serve -l 8971` o `python -m http.server 897
 5. **A cuánto queda**: elegir Lago del Valle, Lagos de Saliencia, Oviedo y León (el vuelo del mapa y el trazo); «Tengo 1
    hora»; «A pie». Que el sombreado del relieve se lea en los cuatro estados.
 6. **El simulador**: elegir fechas en julio y en diciembre (alta y baja), la cancelación y el correo que prepara.
-7. **La visita virtual**: pulsar y moverse por sus miniaturas.
+7. **La visita virtual**: pulsar y moverse por sus miniaturas. **La galería por estancias**: que las filas se vean
+   ordenadas y que la serie de colores (paredes verdes, naranjas y blancas) no desentone; que la marca de agua tenue de
+   EscapadaRural se lea como tal y no como un defecto; el índice fijo (en el móvil, la barra bajo la cabecera); el visor
+   en el móvil (botones abajo, deslizar con el dedo).
 8. **El pie**: bajar del todo y ver cómo se dibuja el día y el sol se esconde.
 9. `?revision` → **Sobria**.
 10. El **foco** con Tab (el medio sol en la esquina).

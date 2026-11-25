@@ -69,7 +69,9 @@
   const irA = (sel) => {
     const el = typeof sel === 'string' ? $(sel) : sel;
     if (!el) return;
-    const y = el.getBoundingClientRect().top + scrollY - cabAlto() - 8;
+    // el margen de scroll del destino manda si es mayor (las estancias de la galería dejan sitio a su índice fijo)
+    const margen = Math.max(cabAlto() + 8, parseFloat(getComputedStyle(el).scrollMarginTop) || 0);
+    const y = el.getBoundingClientRect().top + scrollY - margen;
     scrollTo({ top: Math.max(0, y), behavior: quieto || sobria() ? 'auto' : 'smooth' });
   };
 
@@ -189,6 +191,68 @@
     marco.replaceChildren(f);
     f.focus();
   });
+
+  /* ============ 7 bis. la galería: el índice marca la estancia que se ve (contenido: también con movimiento reducido) ============ */
+  const indice = $$('.estancias__indice a');
+  if (indice.length && 'IntersectionObserver' in window) {
+    const marcar = (id) => indice.forEach((a) => { if (a.dataset.est === id) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+    const ioEst = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) marcar(e.target.id.replace('est-', '')); }), { rootMargin: '-35% 0px -60% 0px' });
+    $$('.estancia').forEach((s) => ioEst.observe(s));
+  }
+
+  /* ============ 7 ter. el visor: abre por el NOMBRE del archivo (checklist 11), la de 800 primero y la grande al cargar ============ */
+  const visor = $('#visor');
+  const vImg = $('#visor-img'), vPie = $('#visor-pie'), vN = $('#visor-n');
+  let serie = [], vAct = 0, vOrigen = null;
+  const infoFoto = (b) => ({ n: b.dataset.visor, alt: (b.querySelector('img') || {}).alt || '', anchos: (b.dataset.anchos || '800').split(',').map(Number), ancho: +b.dataset.ancho || 1600, alto: +b.dataset.alto || 1200 });
+  function ponerFoto(i) {
+    vAct = (i + serie.length) % serie.length;
+    const f = serie[vAct];
+    const peq = f.anchos.includes(800) ? 800 : f.anchos[f.anchos.length - 1];
+    const gran = f.anchos[f.anchos.length - 1];
+    vImg.src = `img/fotos/${f.n}-${peq}.webp`;            // la de la rejilla (ya en caché o ligera)
+    vImg.dataset.nombre = f.n;
+    vImg.alt = f.alt;
+    vImg.width = f.ancho; vImg.height = f.alto;
+    vImg.style.maxWidth = f.ancho + 'px';                  // nunca más grande que la foto
+    if (gran !== peq) {
+      const g = new Image();
+      g.onload = () => { if (vImg.dataset.nombre === f.n) vImg.src = g.src; };
+      g.src = `img/fotos/${f.n}-${gran}.webp`;
+    }
+    vPie.textContent = f.alt;
+    vN.textContent = (vAct + 1) + ' / ' + serie.length;
+  }
+  function abrirVisor(b) {
+    if (!visor || typeof visor.showModal !== 'function') return false;
+    const g = b.dataset.grupo;
+    serie = (g ? $$('[data-visor][data-grupo="' + g + '"]') : [b]).map(infoFoto);
+    const i = serie.findIndex((f) => f.n === b.dataset.visor);
+    vOrigen = b;
+    ponerFoto(i < 0 ? 0 : i);
+    if (!visor.open) visor.showModal();
+    return true;
+  }
+  document.addEventListener('click', (e) => {
+    if (e.defaultPrevented) return;
+    const b = e.target.closest('[data-visor]');
+    if (!b) return;
+    if (abrirVisor(b)) e.preventDefault();               // sin <dialog>, el enlace abre la foto grande
+  });
+  if (visor) {
+    $('#visor-ant').addEventListener('click', () => ponerFoto(vAct - 1));
+    $('#visor-sig').addEventListener('click', () => ponerFoto(vAct + 1));
+    $('#visor-cerrar').addEventListener('click', () => visor.close());
+    visor.addEventListener('click', (e) => { if (e.target === visor || e.target.classList.contains('visor__fig')) visor.close(); });
+    visor.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') ponerFoto(vAct - 1); else if (e.key === 'ArrowRight') ponerFoto(vAct + 1); });
+    visor.addEventListener('close', () => { if (vOrigen && document.contains(vOrigen)) vOrigen.focus({ preventScroll: true }); });
+    // deslizar con el dedo sobre la foto: siguiente o anterior
+    let x0 = null;
+    vImg.addEventListener('pointerdown', (e) => { x0 = e.clientX; });
+    vImg.addEventListener('pointerup', (e) => { if (x0 === null) return; const dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 50) ponerFoto(vAct + (dx < 0 ? 1 : -1)); });
+    vImg.addEventListener('pointercancel', () => { x0 = null; });
+  }
+  A.visor = { abrir: abrirVisor };
 
   /* ============ 8. cookies (y el mando se aparta mientras están) ============ */
   const ck = $('#cookies');

@@ -1,45 +1,5 @@
 [
  {
-  "nombre": "casa-escalera",
-  "ancho": 750,
-  "alto": 562,
-  "anchos": [
-   480,
-   750
-  ],
-  "origen": "Sensación Rural (ficha del alojamiento), sin marca de agua"
- },
- {
-  "nombre": "bano-hidromasaje",
-  "ancho": 750,
-  "alto": 562,
-  "anchos": [
-   480,
-   750
-  ],
-  "origen": "Sensación Rural (ficha del alojamiento), sin marca de agua"
- },
- {
-  "nombre": "dormitorio-verde",
-  "ancho": 750,
-  "alto": 562,
-  "anchos": [
-   480,
-   750
-  ],
-  "origen": "Sensación Rural (ficha del alojamiento), sin marca de agua"
- },
- {
-  "nombre": "bano-ventana",
-  "ancho": 675,
-  "alto": 900,
-  "anchos": [
-   480,
-   675
-  ],
-  "origen": "Sensación Rural (ficha del alojamiento), sin marca de agua"
- },
- {
   "nombre": "casa-fachada",
   "ancho": 675,
   "alto": 900,
@@ -48,6 +8,425 @@
    675
   ],
   "origen": "Sensación Rural (ficha del alojamiento), sin marca de agua"
+ },
+ {
+  "nombre": "casa-escalera-pena",
+  "ancho": 1600,
+  "alto": 1200,
+  "anchos": [
+   480,
+   800,
+   1600
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-64a52c4d733e8.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    0.98,
+    1.0,
+    1.022
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "vista-ventana",
+  "ancho": 675,
+  "alto": 900,
+  "anchos": [
+   480,
+   675
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-6544fb1e9137d.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    1.0,
+    0.999,
+    1.002
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "salon-naranja-cocina",
+  "ancho": 1600,
+  "alto": 1200,
+  "anchos": [
+   480,
+   800,
+   1600
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-65732622805f9.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    0.998,
+    0.99,
+    1.013
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "comedor-buhardilla",
+  "ancho": 1600,
+  "alto": 1200,
+  "anchos": [
+   480,
+   800,
+   1600
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-6573262820962.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    1.013,
+    0.993,
+    0.995
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "salon-mesa",
+  "ancho": 1600,
+  "alto": 1200,
+  "anchos": [
+   480,
+   800,
+   1600
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-6573262e55a38.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    1.015,
+    0.985,
+    1.001
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "cocina-buhardilla",
+  "ancho": 1600,
+  "alto": 1200,
+  "anchos": [
+   480,
+   800,
+   1600
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-6573264970832.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    1.023,
+    0.991,
+    0.987
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "salon-cocina-pequeno",
+  "ancho": 1600,
+  "alto": 1200,
+  "anchos": [
+   480,
+   800,
+   1600
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-65732700a9f0f.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    1.021,
+    0.995,
+    0.985
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "cocina-pasillo",
+  "ancho": 1580,
+  "alto": 1186,
+  "anchos": [
+   480,
+   800,
+   1580
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-657327088e088.webp",
+  "tratamiento": {
+   "giro": -0.5,
+   "balance": [
+    1.011,
+    0.994,
+    0.996
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "salon-sofa",
+  "ancho": 1600,
+  "alto": 1200,
+  "anchos": [
+   480,
+   800,
+   1600
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-657327a41bf4b.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    1.012,
+    0.996,
+    0.992
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "salon-blanco",
+  "ancho": 1600,
+  "alto": 1200,
+  "anchos": [
+   480,
+   800,
+   1600
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-6573287ecbd26.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    0.995,
+    0.993,
+    1.013
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "cocina-ventanas",
+  "ancho": 1600,
+  "alto": 1200,
+  "anchos": [
+   480,
+   800,
+   1600
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-65732896da60e.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    0.993,
+    0.991,
+    1.016
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "dormitorio-dos-camas",
+  "ancho": 1600,
+  "alto": 1200,
+  "anchos": [
+   480,
+   800,
+   1600
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-6573263d5881a.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    1.002,
+    0.998,
+    1.0
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "dormitorio-verde-ventana",
+  "ancho": 1600,
+  "alto": 1200,
+  "anchos": [
+   480,
+   800,
+   1600
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-6573265d191b2.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    1.008,
+    0.991,
+    1.001
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "dormitorio-verde-monte",
+  "ancho": 1600,
+  "alto": 1200,
+  "anchos": [
+   480,
+   800,
+   1600
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-657327221994f.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "dormitorio-crema",
+  "ancho": 1600,
+  "alto": 1200,
+  "anchos": [
+   480,
+   800,
+   1600
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-657327971fb29.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    1.0,
+    0.992,
+    1.008
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "dormitorio-blanco",
+  "ancho": 1600,
+  "alto": 1200,
+  "anchos": [
+   480,
+   800,
+   1600
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-657328859f0eb.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    0.99,
+    0.996,
+    1.015
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "bano-ventana-hidromasaje",
+  "ancho": 1600,
+  "alto": 1200,
+  "anchos": [
+   480,
+   800,
+   1600
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-65732642f124d.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    1.017,
+    0.986,
+    0.997
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "bano-hidromasaje-espejo",
+  "ancho": 1600,
+  "alto": 1200,
+  "anchos": [
+   480,
+   800,
+   1600
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-6573288c05c49.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    1.015,
+    0.993,
+    0.993
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "bano-ducha",
+  "ancho": 1600,
+  "alto": 1200,
+  "anchos": [
+   480,
+   800,
+   1600
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-65732715eed8e.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    0.993,
+    0.996,
+    1.012
+   ],
+   "contraste": 1.04
+  }
+ },
+ {
+  "nombre": "banera-hidromasaje",
+  "ancho": 1600,
+  "alto": 1200,
+  "anchos": [
+   480,
+   800,
+   1600
+  ],
+  "origen": "EscapadaRural (ficha del alojamiento; fotos de los dueños), provisional, con la marca de agua del portal",
+  "fuente": "er-65732653edbfb.webp",
+  "tratamiento": {
+   "giro": 0,
+   "balance": [
+    1.002,
+    0.997,
+    1.002
+   ],
+   "contraste": 1.04
+  }
  },
  {
   "nombre": "pornacal",
