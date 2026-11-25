@@ -1,0 +1,13 @@
+{
+  "name": "Apartamentos rurales Alba",
+  "short_name": "Alba",
+  "lang": "es",
+  "start_url": "./",
+  "display": "browser",
+  "background_color": "#EEF2EE",
+  "theme_color": "#EEF2EE",
+  "icons": [
+    { "src": "marca/favicon.svg", "type": "image/svg+xml", "sizes": "any" },
+    { "src": "marca/icono-512.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}

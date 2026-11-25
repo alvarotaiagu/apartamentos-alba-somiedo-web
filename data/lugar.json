@@ -1,0 +1,10 @@
+{
+ "cotaCasa": 960,
+ "lat": 43.067674,
+ "lon": -6.257025,
+ "cotaCasaNota": "metros sobre el nivel del mar: terreno del MDT05 del IGN en el centro de la casa (está en ladera: de 958 a 961 m en sus bordes)",
+ "catastro": "D00110500QH27A",
+ "coordenadasNota": "centro de la casa en el Catastro (D00110500QH27A); el punto de su web cae a 8 m",
+ "fuente": "scripts/lugar-horizonte.py (agente Lugar 3D)",
+ "fecha": "2026-11-25"
+}

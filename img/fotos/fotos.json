@@ -1,0 +1,102 @@
+[
+ {
+  "nombre": "casa-escalera",
+  "ancho": 750,
+  "alto": 562,
+  "anchos": [
+   480,
+   750
+  ],
+  "origen": "Sensación Rural (ficha del alojamiento), sin marca de agua"
+ },
+ {
+  "nombre": "bano-hidromasaje",
+  "ancho": 750,
+  "alto": 562,
+  "anchos": [
+   480,
+   750
+  ],
+  "origen": "Sensación Rural (ficha del alojamiento), sin marca de agua"
+ },
+ {
+  "nombre": "dormitorio-verde",
+  "ancho": 750,
+  "alto": 562,
+  "anchos": [
+   480,
+   750
+  ],
+  "origen": "Sensación Rural (ficha del alojamiento), sin marca de agua"
+ },
+ {
+  "nombre": "bano-ventana",
+  "ancho": 675,
+  "alto": 900,
+  "anchos": [
+   480,
+   675
+  ],
+  "origen": "Sensación Rural (ficha del alojamiento), sin marca de agua"
+ },
+ {
+  "nombre": "casa-fachada",
+  "ancho": 675,
+  "alto": 900,
+  "anchos": [
+   480,
+   675
+  ],
+  "origen": "Sensación Rural (ficha del alojamiento), sin marca de agua"
+ },
+ {
+  "nombre": "pornacal",
+  "ancho": 1280,
+  "alto": 960,
+  "anchos": [
+   480,
+   800
+  ],
+  "origen": "Wikimedia Commons"
+ },
+ {
+  "nombre": "lago-del-valle",
+  "ancho": 1280,
+  "alto": 853,
+  "anchos": [
+   480,
+   800
+  ],
+  "origen": "Wikimedia Commons"
+ },
+ {
+  "nombre": "lago-de-la-cueva",
+  "ancho": 1280,
+  "alto": 853,
+  "anchos": [
+   480,
+   800
+  ],
+  "origen": "Wikimedia Commons"
+ },
+ {
+  "nombre": "pola-de-somiedo",
+  "ancho": 1280,
+  "alto": 960,
+  "anchos": [
+   480,
+   800
+  ],
+  "origen": "Wikimedia Commons"
+ },
+ {
+  "nombre": "brana-de-sousas",
+  "ancho": 1280,
+  "alto": 720,
+  "anchos": [
+   480,
+   800
+  ],
+  "origen": "Wikimedia Commons"
+ }
+]

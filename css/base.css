@@ -1,0 +1,205 @@
+/* ==========================================================================
+   Alba · «Amanece en Alba» · variables comunes (las define Web; Lugar 3D solo las LEE)
+   La web entera cambia de luz con la hora de Caunedo: cuatro estados en <html data-luz="…">, que pone el script
+   bloqueante del <head> con el sol de ahora (js/sol.js) y luego main.js. Contraste comprobado en
+   `node scripts/paleta.mjs` (WCAG 2) para los cuatro estados.
+   Acento: la teja de su tejado (#B5401F); en los estados oscuros, la misma teja más clara (#E06A40).
+   ========================================================================== */
+@property --cielo-alto { syntax: '<color>'; inherits: true; initial-value: #7FAAD6; }
+@property --cielo-medio { syntax: '<color>'; inherits: true; initial-value: #A9C8E4; }
+@property --cielo-bajo { syntax: '<color>'; inherits: true; initial-value: #DCE8EF; }
+
+:root {
+  --letra-titular: 'Darker Grotesque', 'Arial Narrow', system-ui, sans-serif;
+  --letra-texto: 'Pathway Extreme', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --letra-cifras: 'Ubuntu Sans Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  --radio: 14px;
+  --cabecera: 68px;
+  --gutter: clamp(16px, 4vw, 56px);
+  --ancho: 1320px;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --t-luz: 900ms;
+}
+
+/* ---------- DÍA (y valor por defecto, sin JS) ----------
+   .portada[data-luz] solo en la versión sobria: la página se queda de día y la portada lleva la luz de ahora */
+:root, :root[data-luz="dia"], .portada[data-luz="dia"] {
+  --fondo: #EEF2EE;
+  --fondo-2: #E3EAE4;
+  --superficie: #F8FAF7;
+  --texto: #14201A;
+  --texto-suave: #45534B;
+  --marca: #1D3A2D;
+  --acento: #B5401F;
+  --sobre-acento: #FFF7F2;
+  --acento-texto: #A13818;
+  --linea: #C3CEC5;
+  --foco: #A13818;
+  --cielo-alto: #7FAAD6;
+  --cielo-medio: #A9C8E4;
+  --cielo-bajo: #DCE8EF;
+  --sol: #FFF4D1;
+  --sol-halo: rgba(255, 238, 180, .6);
+  --palabra: #1D3A2D;
+  --capa-1: #A9BBC6;
+  --capa-2: #8BA1A9;
+  --capa-3: #5D796B;
+  --capa-4: #3A5546;
+  --trazo: rgba(255, 255, 255, .55);
+  --suelo: #22362B;
+  --suelo-texto: #F1F5EF;
+  --suelo-suave: #C4D1C7;
+  --cima-texto: #1A2B38;
+  --cima-halo: #E4EEF4;
+  --estrellas: 0;
+  color-scheme: light;
+}
+
+/* ---------- ALBA ---------- */
+:root[data-luz="alba"], .portada[data-luz="alba"] {
+  --fondo: #F2ECEE;
+  --fondo-2: #EAE0E5;
+  --superficie: #FAF6F7;
+  --texto: #221A24;
+  --texto-suave: #574958;
+  --marca: #3B2843;
+  --acento: #B5401F;
+  --sobre-acento: #FFF7F2;
+  --acento-texto: #A13818;
+  --linea: #D5C6CE;
+  --foco: #A13818;
+  --cielo-alto: #5E6E9E;
+  --cielo-medio: #B89CBA;
+  --cielo-bajo: #F4C3A4;
+  --sol: #FFE6BE;
+  --sol-halo: rgba(255, 200, 150, .6);
+  --palabra: #2E2238;
+  --capa-1: #A092B2;
+  --capa-2: #786C8F;
+  --capa-3: #4A425F;
+  --capa-4: #3A3350;
+  --trazo: rgba(255, 230, 220, .5);
+  --suelo: #241F31;
+  --suelo-texto: #F4EEF5;
+  --suelo-suave: #CABDCE;
+  --cima-texto: #2A1F33;
+  --cima-halo: #F6DCCB;
+  --estrellas: .25;
+  color-scheme: light;
+}
+
+/* ---------- ATARDECER ---------- */
+:root[data-luz="atardecer"], .portada[data-luz="atardecer"] {
+  --fondo: #2A1D22;
+  --fondo-2: #33242A;
+  --superficie: #3A2A31;
+  --texto: #F7ECE4;
+  --texto-suave: #D4C0B6;
+  --marca: #F6D2B8;
+  --acento: #E06A40;
+  --sobre-acento: #1F1215;
+  --acento-texto: #F39A72;
+  --linea: #5A454D;
+  --foco: #F39A72;
+  --cielo-alto: #3B3263;
+  --cielo-medio: #8C496B;
+  --cielo-bajo: #C96A45;
+  --sol: #FFD08A;
+  --sol-halo: rgba(255, 160, 90, .55);
+  --palabra: #FBE6D4;
+  --capa-1: #7B5470;
+  --capa-2: #5A3C55;
+  --capa-3: #3B2739;
+  --capa-4: #2F2029;
+  --trazo: rgba(255, 200, 170, .45);
+  --suelo: #1E141C;
+  --suelo-texto: #F7ECE4;
+  --suelo-suave: #D2BEB5;
+  --cima-texto: #FFF0E4;
+  --cima-halo: #4A2840;
+  --estrellas: .15;
+  color-scheme: dark;
+}
+
+/* ---------- NOCHE ---------- */
+:root[data-luz="noche"], .portada[data-luz="noche"] {
+  --fondo: #11171F;
+  --fondo-2: #161E28;
+  --superficie: #1C2531;
+  --texto: #E8EDF4;
+  --texto-suave: #A8B4C3;
+  --marca: #CFDBEA;
+  --acento: #E06A40;
+  --sobre-acento: #1A0F0C;
+  --acento-texto: #F2916B;
+  --linea: #2E3A48;
+  --foco: #F2916B;
+  --cielo-alto: #060A13;
+  --cielo-medio: #0E1830;
+  --cielo-bajo: #1E2E4C;
+  --sol: #FFF4D1;
+  --sol-halo: rgba(255, 238, 180, .3);
+  --palabra: #D9E2F0;
+  --capa-1: #2E3B54;
+  --capa-2: #232D41;
+  --capa-3: #182030;
+  --capa-4: #141B26;
+  --trazo: rgba(190, 210, 240, .35);
+  --suelo: #0D121A;
+  --suelo-texto: #E8EDF4;
+  --suelo-suave: #A9B5C4;
+  --cima-texto: #C9D4E4;
+  --cima-halo: #0E1830;
+  --estrellas: 1;
+  color-scheme: dark;
+}
+
+/* ---------- #lugar: sección OSCURA en los cuatro estados (contrato con Lugar 3D) ---------- */
+#lugar {
+  --fondo: #0E1316;
+  --fondo-2: #131A1E;
+  --superficie: #172026;
+  --texto: #EDF1F2;
+  --texto-suave: #AFBAC0;
+  --marca: #EDF1F2;
+  --linea: #2C383F;
+  --acento-texto: #F2916B;
+  --foco: #F2916B;
+  color-scheme: dark;
+}
+
+/* ---------- base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; scroll-padding-top: calc(var(--cabecera) + 8px); }
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--letra-texto);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+html.con-luz body { transition: background-color var(--t-luz) var(--ease), color var(--t-luz) var(--ease); }
+img, svg, video { display: block; max-width: 100%; }
+img { height: auto; }
+a { color: var(--acento-texto); text-underline-offset: .18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+h1, h2, h3, h4 { font-family: var(--letra-titular); font-weight: 800; line-height: 1.02; letter-spacing: -.01em; margin: 0; color: var(--marca); text-wrap: balance; }
+p { margin: 0 0 1em; text-wrap: pretty; }
+.cifra { font-family: var(--letra-cifras); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.vh { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.env { width: 100%; max-width: var(--ancho); margin-inline: auto; padding-inline: var(--gutter); }
+
+/* el anillo por defecto no se quita sin más: main.js dibuja el foco con forma propia (contorno + medio sol); este es el
+   respaldo (sin JS o si el dibujo no se puede poner) */
+:focus-visible { outline: 2px solid var(--foco); outline-offset: 3px; border-radius: 6px; }
+html.foco-propio :focus-visible { outline-color: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}

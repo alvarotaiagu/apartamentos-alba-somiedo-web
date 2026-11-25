@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apartamentos rurales Alba · Caunedo, Somiedo</title>
+<meta name="description" content="Cuatro apartamentos con entrada independiente en una casa de piedra y madera de Caunedo, a 960 m, en el Parque Natural de Somiedo (Asturias).">
+<meta property="og:title" content="Apartamentos rurales Alba · Caunedo, Somiedo">
+<meta property="og:description" content="Cuatro apartamentos en una casa de piedra y madera, a 960 m, en el Parque Natural de Somiedo.">
+<!--parte:partes/cabeza.html-->
+<!--precarga-->
+</head>
+<body>
+<!--parte:partes/iconos.html-->
+<!--parte:partes/cabecera.html-->
+
+<main id="principal">
+
+  <!-- ==================================================================================================
+       1. PORTADA «Amanece en Alba» (js/portada.js, Alba.portada). «Alba» gigante DETRÁS del perfil real de las peñas
+       que se ven desde la casa (data/portada.json: MDT25 del IGN en capas por distancia; el horizonte de Lugar 3D,
+       data/lugar-horizonte.json, manda en el filo de arriba), el cielo y el sol de ahora en su sitio real y la frase
+       del sol. Sin foto. El SVG que escribe construir.mjs es el respaldo (sin JS) y el LCP.
+       ================================================================================================== -->
+  <section class="portada" id="portada" aria-labelledby="t-portada">
+    <div class="portada__lienzo" data-modulo="portada">
+<!--portada-svg-->
+    </div>
+    <div class="portada__texto">
+      <div class="env">
+        <h1 class="portada__nombre" id="t-portada">Apartamentos rurales Alba<span>Caunedo, Somiedo · <span class="cifra">{{COTA}}</span> m</span></h1>
+        <p class="portada__frase" id="frase-sol"><!--frase-respaldo--></p>
+        <p class="portada__nota">Calculado con el relieve del Instituto Geográfico Nacional. El modelo del terreno no ve árboles ni casas.</p>
+        <p class="portada__acc"><a class="btn btn--sol" href="#reservar">Ver fechas</a><a class="portada__tel" href="tel:+34984281837"><svg class="ico" width="18" height="18" aria-hidden="true"><use href="#i-tel" width="24" height="24"/></svg><span class="cifra">984 281 837</span></a></p>
+        <!-- solo en la versión sobria: el día de hoy en cifras (lo rellena js/portada.js) -->
+        <dl class="portada__cifras" id="hoy-cifras">
+          <div><dt>Amanece</dt><dd class="cifra" data-hoy="orto">··:··</dd></div>
+          <div><dt>El sol entra en la casa</dt><dd class="cifra" data-hoy="entra">··:··</dd></div>
+          <div><dt>Se va tras las peñas</dt><dd class="cifra" data-hoy="sale">··:··</dd></div>
+          <div><dt>Anochece</dt><dd class="cifra" data-hoy="ocaso">··:··</dd></div>
+          <div><dt>Sol en la casa</dt><dd class="cifra" data-hoy="horas">··</dd></div>
+        </dl>
+      </div>
+    </div>
+    <p class="portada__hora" id="portada-hora" aria-hidden="true"></p>
+  </section>
+
+  <!-- ==================================================================================================
+       2. LA CASA: la fachada dibujada (de su foto publicable de Sensación Rural), las cifras y las dos fichas con sus
+       precios por temporada (data/alba.json). No se dice cuál de los cuatro es el grande: no está confirmado.
+       ================================================================================================== -->
+  <section class="casa" id="casa" aria-labelledby="t-casa">
+    <div class="env casa__in">
+      <figure class="casa__dibujo">
+<!--parte:partes/fachada.svg-->
+      </figure>
+      <div class="casa__txt">
+        <h2 class="sec-tit" id="t-casa">Una casa de piedra y madera con cuatro puertas</h2>
+        <p class="casa__intro">Una casa tradicional de Caunedo, rehabilitada en cuatro apartamentos con entrada independiente, dentro del Parque Natural de Somiedo, Reserva de la Biosfera.</p>
+        <dl class="casa__cifras">
+          <div><dt>Apartamentos</dt><dd class="cifra">4</dd></div>
+          <div><dt>Metros sobre el mar</dt><dd class="cifra">{{COTA}}</dd></div>
+          <div><dt>Llaves de turismo rural</dt><dd class="cifra">2</dd></div>
+          <div><dt>Abierto</dt><dd>Todo el año</dd></div>
+        </dl>
+      </div>
+    </div>
+<!--unidades-->
+<!--servicios-->
+<!--vistazo-->
+  </section>
+
+  <!-- ==================================================================================================
+       3. POR DENTRO: su visita virtual (Pano2VR de EuroWeb Media). El iframe NO existe hasta que se pide (carga Google
+       Analytics). Su visor no admite abrir una vista concreta por URL (comprobado en index.html, pano2vr_player.js y
+       skin.js: no leen ni hash ni parámetros), así que va un solo visor con su tira de miniaturas y aquí, la guía.
+       ================================================================================================== -->
+  <section class="dentro" id="dentro" aria-labelledby="t-dentro">
+    <div class="env">
+      <h2 class="sec-tit" id="t-dentro">Por dentro, en 360°</h2>
+      <p class="sec-intro">Su visita virtual: nueve vistas de los cuatro apartamentos, para mirar cada estancia girando a tu aire.</p>
+<!--visita-->
+<!--fotos-dentro-->
+    </div>
+  </section>
+
+  <!-- ==================================================================================================
+       4. EL ALBA, HOY (#lugar): módulo del agente Lugar 3D. Sección OSCURA en los cuatro estados (base.css redefine
+       sus variables). Ningún antepasado de [data-modulo="lugar"] lleva overflow, transform ni filter.
+       Respaldo de la Web (sin JS): el sol en la casa el día 21 de cada mes, calculado con js/sol.js al construir.
+       ================================================================================================== -->
+  <section class="lugar" id="lugar" aria-labelledby="t-lugar">
+    <div class="env lugar__cab">
+      <h2 class="sec-tit" id="t-lugar">El alba, hoy</h2>
+      <p>El valle de Somiedo alrededor de Caunedo con el relieve y la ortofoto del IGN, y el sol de ahora: la línea de sol baja por la ladera hasta tocar la casa.</p>
+    </div>
+    <div data-modulo="lugar">
+<!--lugar-respaldo-->
+    </div>
+  </section>
+
+  <!-- ==================================================================================================
+       5. A CUÁNTO QUEDA (js/distancias.js, Alba.distancias): mapa propio sobre el relieve real con la casa en el
+       centro; al elegir un sitio se dibuja la carretera REAL (OSRM) con km, minutos y su perfil de altura (MDT del
+       IGN). Mandos: «tengo 20 min / 1 h / medio día» y a pie / en coche. Sin JS: la tabla.
+       ================================================================================================== -->
+  <section class="dist" id="distancias" aria-labelledby="t-dist">
+    <div class="env">
+      <h2 class="sec-tit" id="t-dist">A cuánto queda</h2>
+      <p class="sec-intro">Desde la puerta de casa. Elige un sitio y se dibuja el camino de verdad, con los minutos, los kilómetros y lo que sube.</p>
+<!--distancias-->
+    </div>
+  </section>
+
+  <!-- 6. RESEÑAS -->
+  <section class="resenas" id="resenas" aria-labelledby="t-resenas">
+<!--resenas-->
+  </section>
+
+  <!-- ==================================================================================================
+       7. RESERVAR (js/reserva.js): simulador con sus precios por temporada y su política de cancelación. La
+       disponibilidad es SIMULADA y lo dice a la vista. Al final prepara la solicitud por correo o teléfono.
+       ================================================================================================== -->
+  <section class="reservar" id="reservar" aria-labelledby="t-reservar">
+    <div class="env">
+      <h2 class="sec-tit" id="t-reservar">Elige fechas</h2>
+      <p class="sec-intro">Prueba fechas y mira el precio de cada noche. Cuando lo tengas, se prepara la solicitud para la casa: ellos te confirman.</p>
+<!--reserva-->
+    </div>
+  </section>
+
+  <!-- 8. CÓMO LLEGAR + CONTACTO + MAPA (Google, solo al pulsar) -->
+  <section class="contacto" id="contacto" aria-labelledby="t-contacto">
+<!--contacto-->
+  </section>
+
+</main>
+
+<!--parte:partes/pie.html-->
+<!--datos-->
+<script src="js/sol.js" defer></script>
+<script src="js/portada.js" defer></script>
+<script src="js/lugar.js" defer></script>
+<script src="js/distancias.js" defer></script>
+<script src="js/reserva.js" defer></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>

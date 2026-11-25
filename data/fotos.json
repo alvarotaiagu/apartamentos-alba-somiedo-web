@@ -1,0 +1,16 @@
+{
+ "_nota": "Fotos de la casa. HOY solo hay 5 publicables (Sensación Rural, 750 px, sin marca de agua); las 83 de su web son de EuroWeb Media y NO se usan. «acento» es lo que sale en «Por dentro» (construir.mjs, <!--fotos-dentro-->). «estancias» queda preparada para la galería por estancias cuando la casa mande sus originales: se ponen en ref/origen/casa/, se añaden a scripts/fotos.py, se listan aquí por estancia y se construye la galería (índice fijo que marca la estancia, filas de la misma altura, sin marcos; ver README).",
+ "acento": [
+  { "n": "dormitorio-verde", "alt": "Un dormitorio: techo de madera con vigas, cama de matrimonio y contraventanas" },
+  { "n": "bano-hidromasaje", "alt": "La bañera de hidromasaje de uno de los baños" },
+  { "n": "bano-ventana", "alt": "Un baño con ventana de madera, lavabo y bañera" },
+  { "n": "casa-escalera", "alt": "La escalera exterior de madera y piedra, con la peña detrás" }
+ ],
+ "estancias": [
+  { "id": "fuera", "nombre": "La casa por fuera", "fotos": ["casa-fachada", "casa-escalera"] },
+  { "id": "salon", "nombre": "Salón y cocina", "fotos": [] },
+  { "id": "dormitorios", "nombre": "Dormitorios", "fotos": ["dormitorio-verde"] },
+  { "id": "banos", "nombre": "Baños", "fotos": ["bano-hidromasaje", "bano-ventana"] },
+  { "id": "alrededor", "nombre": "Desde la casa", "fotos": [] }
+ ]
+}

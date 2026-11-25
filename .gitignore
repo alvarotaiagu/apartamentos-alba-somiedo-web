@@ -1,0 +1,10 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.tmp
+# Privado: no va al repo (ref/origen tiene fotos de EuroWeb Media, con derechos de un tercero,
+# y descargas del IGN que se regeneran con los scripts)
+ref/
+pruebas/
+ENCARGO.md
+PENDIENTES.md

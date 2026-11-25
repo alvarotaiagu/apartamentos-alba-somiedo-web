@@ -1,0 +1,99 @@
+{
+ "_fuente": "ref/DATOS-ALBA.md (recogidos el 2026-11-25). Una sola fuente de datos para construir.mjs, legales y el simulador. Lo que no está en DATOS va como «porConfirmar».",
+ "nombre": "Apartamentos rurales Alba",
+ "corto": "Alba",
+ "lugar": {
+  "aldea": "Caunedo",
+  "parroquia": "Gúa",
+  "cp": "33840",
+  "concejo": "Somiedo",
+  "provincia": "Asturias",
+  "calle": "Calle Caunedo, 43",
+  "calleConfirmada": false,
+  "cotaTexto": "959 m",
+  "parque": "Parque Natural de Somiedo",
+  "biosfera": "Reserva de la Biosfera (UNESCO, diciembre de 2000)"
+ },
+ "registro": "AR-291-AS",
+ "categoria": "2 llaves",
+ "abierto": "Todo el año",
+ "capacidad": { "ficha": 17, "texto": 16, "confirmada": false },
+ "contacto": {
+  "telefonos": [
+   { "texto": "984 281 837", "tel": "+34984281837", "tipo": "Fijo" },
+   { "texto": "637 544 757", "tel": "+34637544757", "tipo": "Móvil" }
+  ],
+  "correo": "apartamentosalba@hotmail.com",
+  "whatsapp": { "numero": "34637544757", "confirmado": false }
+ },
+ "titular": {
+  "nombre": "Vimay Alojamientos, S. L.",
+  "nif": "B74046673",
+  "domicilio": "33840 Caunedo (Somiedo), Asturias"
+ },
+ "unidades": [
+  {
+   "id": "pequeno",
+   "cuantos": 3,
+   "nombre": "Apartamento para 2 a 4",
+   "nombreCorto": "Para 2 a 4",
+   "personas": [2, 4],
+   "precios": { "alta": 70, "baja": 60 }
+  },
+  {
+   "id": "grande",
+   "cuantos": 1,
+   "nombre": "Apartamento para 4 a 5",
+   "nombreCorto": "Para 4 a 5",
+   "personas": [4, 5],
+   "precios": { "alta": 120, "baja": 100 }
+  }
+ ],
+ "servicios": [
+  { "icono": "puerta", "nombre": "Entrada independiente", "detalle": "Cada apartamento, su puerta" },
+  { "icono": "cocina", "nombre": "Cocina equipada", "detalle": "Horno, microondas y cafetera" },
+  { "icono": "hidromasaje", "nombre": "Baño con hidromasaje", "detalle": "Bañera de hidromasaje" },
+  { "icono": "calefaccion", "nombre": "Calefacción", "detalle": "Radiadores en las estancias" },
+  { "icono": "cama", "nombre": "Ropa de cama", "detalle": "Incluida" },
+  { "icono": "lavadora", "nombre": "Lavadora", "detalle": "En las fotos de los apartamentos" },
+  { "icono": "tv", "nombre": "Televisión", "detalle": "En el salón" },
+  { "icono": "aparcamiento", "nombre": "Aparcamiento", "detalle": "Junto a la casa" }
+ ],
+ "temporadas": {
+  "alta": "Julio, agosto, Semana Santa, Navidades y puentes nacionales",
+  "baja": "El resto del año",
+  "supuestos": "Para el simulador: Semana Santa = noches de Domingo de Ramos a Domingo de Pascua; Navidades = noches del 23 de diciembre al 6 de enero; puente = las noches del fin de semana pegado a un festivo nacional que cae en lunes, martes, jueves o viernes. La ocupación del calendario es inventada. Por confirmar con la casa."
+ },
+ "cancelacion": {
+  "general": [
+   { "dias": 15, "texto": "Con más de 15 días de antelación se devuelve todo el adelanto." },
+   { "dias": 7, "texto": "Entre 7 y 15 días antes, se devuelve la mitad." },
+   { "dias": 0, "texto": "En los 7 días antes de la llegada no se devuelve nada." }
+  ],
+  "alta": "En temporada alta, Navidades y puentes, si se anula con menos de 30 días se pierde todo el adelanto.",
+  "gastos": "Los gastos de cancelación corren por cuenta del cliente.",
+  "norma": "Decreto 143/2002, de 14 de noviembre, de alojamientos de turismo rural del Principado de Asturias"
+ },
+ "resenas": {
+  "nota": "4,7",
+  "sobre": 5,
+  "recuento": 39,
+  "fuente": "Google",
+  "comprobada": false,
+  "origenDato": "Sensación Rural (ficha del alojamiento) dice 4,7 con 39 reseñas de Google",
+  "enlace": "https://www.google.com/maps/search/?api=1&query=Apartamentos%20rurales%20Alba%2C%20Caunedo%2C%20Somiedo"
+ },
+ "llegar": {
+  "oviedo": "Desde Oviedo, por la N-634; antes de Cornellana se coge la AS-15 y luego la AS-227 por Belmonte y Pola de Somiedo hasta Caunedo.",
+  "leon": "Desde León, por autopista hasta La Magdalena; después la CL-623 por Sena de Luna hasta Piedrafita de Babia, y desde allí se baja por el puerto de Somiedo."
+ },
+ "visita": {
+  "url": "https://cdn.eurowebmedia.es/docs/visitas-virtuales/0000141572/index.html",
+  "vistas": [
+   { "apartamento": 1, "vistas": 3 },
+   { "apartamento": 2, "vistas": 2 },
+   { "apartamento": 3, "vistas": 2 },
+   { "apartamento": 4, "vistas": 2 }
+  ]
+ }
+}

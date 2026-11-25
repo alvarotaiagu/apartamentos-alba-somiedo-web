@@ -1,0 +1,50 @@
+<!-- ============ pie: el día se completa. La portada abrió el día (el sol que entra en la casa); el pie lo cierra con el
+     mismo perfil de las peñas y el camino ENTERO del sol de hoy: al llegar, el camino se dibuja y el sol se va tras las
+     peñas por donde se va de verdad. Con movimiento reducido, ya está completo. (js/portada.js, Alba.dia) ============ -->
+<footer class="pie" id="pie">
+  <div class="env">
+    <figure class="pie__dia" data-modulo="dia">
+<!--dia-svg-->
+      <figcaption class="pie__dia-txt" id="dia-txt"><!--dia-respaldo--></figcaption>
+    </figure>
+    <div class="pie__cols">
+      <div>
+        <h2 class="pie__h">Dónde</h2>
+        <p>Caunedo (parroquia de Gúa)<br>33840 Somiedo, Asturias</p>
+        <p><a href="#contacto">Cómo llegar</a></p>
+      </div>
+      <div>
+        <h2 class="pie__h">Reservas</h2>
+        <p><a class="cifra" href="tel:+34984281837">984 281 837</a><br><a class="cifra" href="tel:+34637544757">637 544 757</a><br><a href="mailto:apartamentosalba@hotmail.com">apartamentosalba@hotmail.com</a></p>
+      </div>
+      <div>
+        <h2 class="pie__h">La casa</h2>
+        <p><a href="#casa">Los apartamentos</a><br><a href="#dentro">Visita virtual</a><br><a href="#distancias">A cuánto queda</a><br><a href="#reservar">Ver fechas</a></p>
+      </div>
+    </div>
+<!--creditos-->
+    <div class="pie__legal">
+      <nav aria-label="Legal"><a href="aviso-legal.html">Aviso legal</a><a href="privacidad.html">Privacidad</a><a href="cookies.html">Cookies</a><a href="accesibilidad.html">Accesibilidad</a><button type="button" id="abrir-cookies">Preferencias de cookies</button></nav>
+      <p>© <span id="anno">2026</span> Vimay Alojamientos, S. L. · Registro de turismo <span class="cifra">AR-291-AS</span> · 2 llaves</p>
+    </div>
+  </div>
+</footer>
+
+<div class="cookies" id="cookies" role="region" aria-label="Aviso de cookies" hidden>
+  <p>Sin cookies de análisis ni de publicidad: solo se guarda que has visto este aviso. Las letras vienen de Google Fonts. La visita virtual (EuroWeb Media, con Google Analytics) y el mapa de Google solo se cargan si los pides. <a href="cookies.html">Más información</a></p>
+  <div class="cookies__acc">
+    <button class="btn btn--acento" type="button" id="ck-si">Entendido</button>
+    <button class="btn btn--linea" type="button" id="ck-no">Solo lo necesario</button>
+  </div>
+</div>
+
+<!-- el foco del teclado: contorno redondeado + el medio sol del alba en la esquina (lo coloca main.js) -->
+<svg class="foco-alba" id="foco-alba" aria-hidden="true" focusable="false"><path class="foco-alba__marco"/><path class="foco-alba__sol"/></svg>
+
+<!-- MANDO DE MAQUETA (no viaja al cliente): solo con ?revision -->
+<div class="mando" id="mando" role="group" aria-label="Dos versiones de la misma web" hidden>
+  <span class="mando__eti">Versión</span>
+  <button type="button" data-densidad="amanece" aria-pressed="true">Amanece</button>
+  <button type="button" data-densidad="sobria" aria-pressed="false">Sobria</button>
+</div>
+<!-- fin del MANDO DE MAQUETA -->

@@ -1,0 +1,69 @@
+<!-- script bloqueante: clase «js», entrar siempre arriba (checklist 12), la LUZ de ahora en Caunedo (antes de pintar,
+     para que la página no arranque de día y salte a noche) y el mando de maqueta.
+     La luz sale de la altura del sol en Caunedo a esta hora (o a ?hora=HH:MM / ?fecha=AAAA-MM-DD, hora de Madrid):
+     noche < −6°; alba y atardecer entre −6° y 6° (mañana o tarde); día por encima. ?luz=alba|dia|atardecer|noche la fija.
+     Es la misma regla que aplica main.js con js/sol.js (más preciso) cada minuto. -->
+<script>
+(function (d, w) {
+  var h = d.documentElement;
+  h.classList.add('js');
+  var A = w.Alba = w.Alba || {};
+  try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
+  if (!location.hash) w.scrollTo(0, 0);
+  var q = null;
+  try { q = new URLSearchParams(location.search); } catch (e) {}
+  var R = Math.PI / 180, LAT = 43.067674, LON = -6.257025;
+  function partes(t) {
+    var p = {};
+    try { new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Madrid', hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).formatToParts(new Date(t)).forEach(function (x) { p[x.type] = +x.value; }); }
+    catch (e) { var u = new Date(t + 3600000); p = { year: u.getUTCFullYear(), month: u.getUTCMonth() + 1, day: u.getUTCDate(), hour: u.getUTCHours(), minute: u.getUTCMinutes() }; }
+    return p;
+  }
+  function instante() {
+    var t = Date.now(), hq = q && q.get('hora'), fq = q && q.get('fecha');
+    var mh = hq && /^(\d{1,2}):(\d{2})$/.exec(hq), mf = fq && /^(\d{4})-(\d{2})-(\d{2})$/.exec(fq);
+    if (!mh && !mf) return t;
+    var p = partes(t);
+    var y = mf ? +mf[1] : p.year, mo = mf ? +mf[2] : p.month, da = mf ? +mf[3] : p.day, hh = mh ? +mh[1] : p.hour, mi = mh ? +mh[2] : p.minute;
+    var base = Date.UTC(y, mo - 1, da, hh, mi), x = base - 3600000;
+    for (var k = 0; k < 3; k++) { var v = partes(x); var vista = Date.UTC(v.year, v.month - 1, v.day, v.hour, v.minute); if (vista === base) break; x += base - vista; }
+    return x;
+  }
+  function sol(t) {
+    var n = t / 864e5 + 2440587.5 - 2451545, g = (357.529 + 0.98560028 * n) * R, L = (280.459 + 0.98564736 * n + 1.915 * Math.sin(g) + 0.02 * Math.sin(2 * g)) * R;
+    var e = (23.439 - 3.6e-7 * n) * R, ra = Math.atan2(Math.cos(e) * Math.sin(L), Math.cos(L)), dec = Math.asin(Math.sin(e) * Math.sin(L));
+    var H = ((280.46061837 + 360.98564736629 * n + LON) * R - ra) % (2 * Math.PI);
+    if (H > Math.PI) H -= 2 * Math.PI; if (H < -Math.PI) H += 2 * Math.PI;
+    return { altura: Math.asin(Math.sin(LAT * R) * Math.sin(dec) + Math.cos(LAT * R) * Math.cos(dec) * Math.cos(H)) / R, manana: H < 0 };
+  }
+  A.luzDe = function (altura, manana) { return altura < -6 ? 'noche' : altura < 6 ? (manana ? 'alba' : 'atardecer') : 'dia'; };
+  var fija = q && q.get('luz');
+  var luz = /^(alba|dia|atardecer|noche)$/.test(fija || '') ? fija : null;
+  if (!luz) { try { var s = sol(instante()); luz = A.luzDe(s.altura, s.manana); } catch (e) { luz = 'dia'; } }
+  h.setAttribute('data-luz', luz);
+  A.luzInicial = { luz: luz, fija: !!(fija && luz === fija) };
+  try {
+    if (q && q.has('sin-webgl')) h.classList.add('sin-webgl');
+    // MANDO DE MAQUETA (no viaja al cliente): solo con ?revision
+    if (q && q.has('revision')) {
+      h.classList.add('revision');
+      if (q.get('densidad') === 'sobria') h.classList.add('densidad-sobria');
+    }
+  } catch (e) {}
+})(document, window);
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@500..900&family=Pathway+Extreme:opsz,wght@8..12,400..700&family=Ubuntu+Sans+Mono:wght@400..600&display=swap">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/estilos.css">
+<link rel="stylesheet" href="css/lugar.css">
+<link rel="icon" href="marca/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="marca/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="marca/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#EEF2EE">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:image" content="img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">

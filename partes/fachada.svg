@@ -1,0 +1,61 @@
+<svg class="fachada" viewBox="84 140 532 640" role="img" aria-labelledby="fachada-t" focusable="false">
+  <title id="fachada-t">Dibujo de la fachada: planta baja de piedra con la puerta de madera, escalera exterior de piedra con barandilla de balaustres de madera que sube a la planta alta, encalada, con dos ventanas enmarcadas en granito, el rótulo «Apartamentos rurales Alba» y tejado de teja roja con su chimenea</title>
+  <defs>
+    <pattern id="f-piedra" width="64" height="44" patternUnits="userSpaceOnUse">
+      <path class="f-junta" d="M0 10h18l6 -4h22l6 5h12M0 24h8l5 3h20l4 -3h27M0 38h24l4 -3h18l6 4h12M18 10v14M46 6v18M33 27v8M52 24v14M8 24v14M24 38v6M58 38v6"/>
+    </pattern>
+  </defs>
+  <!-- el suelo empedrado -->
+  <path class="f-suelo" d="M96 662H604L640 780H90Z"/>
+  <!-- tejado: el alero, la teja y la chimenea -->
+  <path class="f-teja" d="M96 224H576L584 238H88Z"/>
+  <path class="f-alero" d="M88 238H584V245H88Z"/>
+  <path class="f-teja-linea" d="M120 224l-4 14M150 224l-3 14M180 224l-3 14M210 224l-2 14M240 224l-2 14M270 224l-1 14M300 224v14M330 224v14M360 224l1 14M390 224l1 14M420 224l2 14M450 224l2 14M480 224l3 14M510 224l3 14M540 224l4 14"/>
+  <path class="f-piedra-lisa" d="M410 172H452V224H410Z"/>
+  <path class="f-teja" d="M403 172L431 150L459 172Z"/>
+  <path class="f-piedra-lisa" d="M292 208H338V224H292Z"/>
+  <path class="f-teja" d="M286 208L315 193L344 208Z"/>
+  <!-- planta alta encalada, con las esquinas de granito -->
+  <path class="f-cal" d="M98 245H576V420H98Z"/>
+  <path class="f-granito" d="M98 252H142V282H98ZM98 282H128V306H98ZM98 306H142V334H98ZM98 334H128V358H98ZM98 358H142V382H98Z"/>
+  <!-- ventanas de arriba con su marco de granito -->
+  <path class="f-granito" d="M184 256H294V332H184ZM318 256H426V332H318Z"/>
+  <path class="f-vidrio" d="M196 268H282V320H196ZM330 268H414V320H330Z"/>
+  <path class="f-cruz" d="M239 268V320M196 294H282M372 268V320M330 294H414"/>
+  <!-- la puerta de arriba, abierta, y su hoja de madera -->
+  <path class="f-vidrio" d="M452 254H520V410H452Z"/>
+  <path class="f-madera" d="M520 250L560 244V346L520 352Z"/>
+  <!-- el rótulo de madera -->
+  <path class="f-madera" d="M276 334H424V352H276ZM326 352H374V372H326Z"/>
+  <text class="f-rotulo" x="350" y="347.5" text-anchor="middle">APARTAMENTOS RURALES</text>
+  <text class="f-rotulo" x="350" y="366" text-anchor="middle">ALBA</text>
+  <!-- tejadillo sobre la puerta de abajo, con sus jabalcones -->
+  <path class="f-teja" d="M106 366H264L268 382H102Z"/>
+  <path class="f-madera-linea" d="M120 382L144 414M248 382L226 414M144 414H226"/>
+  <path class="f-farol" d="M186 392h12v20h-12z"/>
+  <!-- planta baja de piedra -->
+  <path class="f-piedra" d="M104 420H556V662H104Z"/>
+  <path class="f-piedra-textura" d="M104 420H556V662H104Z" fill="url(#f-piedra)"/>
+  <path class="f-granito" d="M154 428H246V604H154Z"/>
+  <path class="f-madera" d="M164 438H236V604H164Z"/>
+  <path class="f-madera-linea" d="M200 438V604M170 520H230"/>
+  <path class="f-granito" d="M452 436H538V530H452Z"/>
+  <path class="f-vidrio" d="M462 446H528V520H462Z"/>
+  <path class="f-cruz" d="M495 446V520M462 483H528"/>
+  <!-- el pilar y el descansillo -->
+  <path class="f-granito" d="M556 412H598V664H556Z"/>
+  <path class="f-granito" d="M428 408H598V422H428Z"/>
+  <!-- la escalera de piedra -->
+  <path class="f-piedra" d="M262 702H310L456 428L432 420L262 618Z"/>
+  <path class="f-piedra-textura" d="M262 702H310L456 428L432 420L262 618Z" fill="url(#f-piedra)"/>
+  <path class="f-peldanos" d="M300 690h14v-18h10v-18h10v-18h10v-18h10v-18h10v-18h10v-18h10v-18h10v-18h10v-18h10v-18h10v-18h10v-18h10v-14"/>
+  <!-- barandilla de balaustres: la de la escalera y la del descansillo -->
+  <path class="f-baranda" d="M268 524L446 348M268 524V700M446 348V412M438 346H594M438 408H594M594 346V412"/>
+  <path class="f-balaustre" d="M282 512V634M296 498V618M310 484V602M324 470V586M338 456V570M352 442V554M366 428V538M380 414V522M394 400V506M408 386V490M422 372V474M436 358V458M454 346V408M468 346V408M482 346V408M496 346V408M510 346V408M524 346V408M538 346V408M552 346V408M566 346V408M580 346V408"/>
+  <!-- escalones de la entrada y la barandilla de la izquierda -->
+  <path class="f-granito" d="M108 604H264V622H108ZM112 622H264V642H112ZM116 642H264V662H116ZM120 662H264V700H120Z"/>
+  <path class="f-baranda" d="M112 548V702M152 548V610M112 548H152M112 578H152"/>
+  <!-- la mesa de fuera -->
+  <path class="f-madera" d="M388 600H574V610H388ZM398 642H588V650H398Z"/>
+  <path class="f-madera-linea" d="M404 610L392 700M556 610L570 700M410 650L404 700M576 650L582 700"/>
+</svg>

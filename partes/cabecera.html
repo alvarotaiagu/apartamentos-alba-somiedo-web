@@ -1,0 +1,40 @@
+<a class="saltar" href="#principal">Saltar al contenido</a>
+
+<!-- ============ cabecera fija: el nombre (no tienen logo: se escribe con la letra de la web y el medio sol del alba),
+     la navegación, el mando de LUZ (alba, día, atardecer, noche, ahora) y «Ver fechas». Transparente sobre el cielo de la
+     portada; con fondo y blur en cuanto se baja (.sc) ============ -->
+<header class="cab" id="cab">
+  <div class="cab__in">
+    <a class="marca" href="./" aria-label="Apartamentos rurales Alba, a la portada">
+      <svg class="marca__sol" viewBox="0 0 32 20" aria-hidden="true" focusable="false"><path class="marca__arco" d="M5 17a11 11 0 0 1 22 0"/><path class="marca__linea" d="M1 17h30"/></svg>
+      <span class="marca__nombre">Alba</span>
+      <span class="marca__sub">Apartamentos rurales · Somiedo</span>
+    </a>
+    <nav class="cab__nav" aria-label="Principal">
+      <a href="#casa">La casa</a>
+      <a href="#dentro">Por dentro</a>
+      <a href="#lugar">El alba, hoy</a>
+      <a href="#distancias">A cuánto queda</a>
+    </nav>
+    <div class="luz" id="luz" role="group" aria-label="Luz de la web">
+      <button type="button" data-luz="alba" aria-pressed="false" title="Alba"><svg class="ico" width="20" height="20" aria-hidden="true"><use href="#i-alba" width="24" height="24"/></svg><span class="vh">Alba</span></button>
+      <button type="button" data-luz="dia" aria-pressed="false" title="Día"><svg class="ico" width="20" height="20" aria-hidden="true"><use href="#i-dia" width="24" height="24"/></svg><span class="vh">Día</span></button>
+      <button type="button" data-luz="atardecer" aria-pressed="false" title="Atardecer"><svg class="ico" width="20" height="20" aria-hidden="true"><use href="#i-atardecer" width="24" height="24"/></svg><span class="vh">Atardecer</span></button>
+      <button type="button" data-luz="noche" aria-pressed="false" title="Noche"><svg class="ico" width="20" height="20" aria-hidden="true"><use href="#i-noche" width="24" height="24"/></svg><span class="vh">Noche</span></button>
+      <button type="button" data-luz="ahora" aria-pressed="true" title="La luz de ahora en Caunedo"><svg class="ico" width="20" height="20" aria-hidden="true"><use href="#i-ahora" width="24" height="24"/></svg><span class="vh">Ahora, la de Caunedo</span></button>
+    </div>
+    <a class="btn btn--acento cab__reservar" href="#reservar">Ver fechas</a>
+    <button class="cab__menu" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu-movil"><span class="vh">Menú</span><i></i><i></i></button>
+  </div>
+  <div class="menu-movil" id="menu-movil" aria-hidden="true">
+    <nav aria-label="Menú">
+      <a href="#casa"><small>Cuatro apartamentos, cada uno con su puerta</small>La casa</a>
+      <a href="#dentro"><small>Su visita virtual</small>Por dentro</a>
+      <a href="#lugar"><small>El valle y el sol de hoy, en 3D</small>El alba, hoy</a>
+      <a href="#distancias"><small>Lagos, brañas, Oviedo y León</small>A cuánto queda</a>
+      <a href="#reservar"><small>Fechas y precios</small>Reservar</a>
+      <a href="#contacto"><small>Caunedo, Somiedo</small>Cómo llegar</a>
+    </nav>
+    <p class="menu-movil__tel"><a class="cifra" href="tel:+34984281837">984 281 837</a><a class="cifra" href="tel:+34637544757">637 544 757</a><a href="mailto:apartamentosalba@hotmail.com">apartamentosalba@hotmail.com</a></p>
+  </div>
+</header>
